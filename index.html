@@ -443,7 +443,7 @@
 // ================================================================
 // ESTADO
 // ================================================================
-const S = { nome:'', email:'', mat:'', xp:0, xpMax:500, concluidas:[], respostas:{}, inicio: new Date().toISOString() };
+const S = { nome:'', email:'', mat:'', xp:0, xpMax:450, concluidas:[], respostas:{}, inicio: new Date().toISOString() };
 const WEBHOOK = 'https://script.google.com/macros/s/AKfycbyojT9HMxZLi4GBeSBJI1oev4J4l7v2XI5PWiMpzimo8sobw4Suos2YbN0Eagiw_iks/exec';
 
 // ================================================================
@@ -798,7 +798,7 @@ function render(){
     <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>`;
 
   // Cenas já vistas
-  MA.cenas.forEach((cn,i)=>{ if(i<cena||(cena>=MA.cenas.length)) h+=renderCena(cn); });
+  MA.cenas.forEach((cn,i)=>{ if(i<cena) h+=renderCena(cn); });
   // Cena atual
   if(cena<MA.cenas.length){
     h+=renderCena(MA.cenas[cena]);
@@ -1051,7 +1051,7 @@ async function enviar(){
     btn.textContent='✅ CONFIGURE O WEBHOOK'; btn.disabled=false; return;
   }
   try{
-    await fetch(WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    await fetch(WEBHOOK,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)});
     btn.textContent='✅ ENVIADO!'; btn.style.background='var(--green)';
   } catch(e){ btn.textContent='❌ ERRO — Tente novamente'; btn.disabled=false; }
 }
