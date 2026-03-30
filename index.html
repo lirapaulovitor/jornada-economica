@@ -507,6 +507,9 @@
     <div class="mapa-titulo">Módulos</div>
     <div class="mapa-sub" id="mapa-sub">Selecione um módulo para começar.</div>
     <div class="missoes-grid" id="missoes-grid"></div>
+    <div style="text-align:center;margin-top:2rem">
+      <button onclick="reiniciar()" style="background:none;border:1px solid var(--border);border-radius:var(--radius);padding:0.45rem 1rem;font-family:var(--mono);font-size:0.65rem;color:var(--text-dim);cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:var(--transition)" onmouseover="this.style.borderColor='var(--red-border)';this.style.color='var(--red)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)'">Reiniciar do zero</button>
+    </div>
   </div>
 
   <div id="tela-missao">
@@ -544,10 +547,39 @@
 
 <script>
 // ================================================================
-// ESTADO
+// ESTADO — carrega do localStorage se existir
 // ================================================================
-const S = { nome:'', email:'', mat:'', xp:0, xpMax:450, concluidas:[], respostas:{}, inicio: new Date().toISOString() };
+const STORAGE_KEY = 'jornada_economica_v1';
+let S = carregarEstado();
 const WEBHOOK = 'https://script.google.com/macros/s/AKfycbyojT9HMxZLi4GBeSBJI1oev4J4l7v2XI5PWiMpzimo8sobw4Suos2YbN0Eagiw_iks/exec';
+
+function estadoPadrao(){
+  return { nome:'', email:'', mat:'', xp:0, xpMax:450, concluidas:[], respostas:{}, inicio: new Date().toISOString() };
+}
+function carregarEstado(){
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){ const saved = JSON.parse(raw); if(saved && saved.nome) return saved; }
+  } catch(e){ console.warn('Erro ao carregar progresso:', e); }
+  return estadoPadrao();
+}
+function salvar(){
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(S)); }
+  catch(e){ console.warn('Erro ao salvar progresso:', e); }
+}
+function reiniciar(){
+  if(!confirm('Tem certeza que deseja reiniciar? Todo o progresso será perdido.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  S = estadoPadrao();
+  document.getElementById('jogo').style.display='none';
+  document.getElementById('tela-final').style.display='none';
+  document.getElementById('tela-missao').style.display='none';
+  document.getElementById('tela-cadastro').style.display='flex';
+  document.getElementById('inp-nome').value='';
+  document.getElementById('inp-email').value='';
+  document.getElementById('inp-mat').value='';
+}
+
 
 // ================================================================
 // CONTEÚDO DAS MISSÕES (dados preservados, labels atualizados)
@@ -814,6 +846,7 @@ function iniciar(){
   const e = document.getElementById('inp-email').value.trim();
   if(!n||!e){ alert('Preencha nome e e-mail.'); return; }
   S.nome=n; S.email=e; S.mat=document.getElementById('inp-mat').value.trim();
+  salvar();
   document.getElementById('badge-nome').textContent = n.split(' ')[0].toUpperCase();
   document.getElementById('tela-cadastro').style.display='none';
   document.getElementById('jogo').style.display='flex';
@@ -1002,6 +1035,7 @@ function renderDesafio(d,idx){
 function respMC(id,escolha,correta){
   if(S.respostas[MA.id][id]!==undefined) return;
   S.respostas[MA.id][id]=escolha;
+  salvar();
   if(escolha===correta){ acertos++; notif('Correto','ok'); }
   else notif('Incorreto','nok');
   setTimeout(()=>advDesafio(id),350);
@@ -1009,6 +1043,7 @@ function respMC(id,escolha,correta){
 function respVF(id,val,correta){
   if(S.respostas[MA.id][id]!==undefined) return;
   S.respostas[MA.id][id]=val;
+  salvar();
   if(val===correta){ acertos++; notif('Correto','ok'); }
   else notif('Incorreto','nok');
   setTimeout(()=>advDesafio(id),350);
@@ -1018,6 +1053,7 @@ function respEns(id,min){
   const w=txt.split(/\s+/).filter(x=>x.length>0).length;
   if(w<min){ alert(`Mínimo ${min} palavras. Você escreveu ${w}.`); return; }
   S.respostas[MA.id][id]={txt};
+  salvar();
   notif('Registrado','neutro');
   setTimeout(()=>advDesafio(id),350);
 }
@@ -1028,6 +1064,7 @@ function confDrag(id){
     resultado[z.id]=Array.from(document.querySelectorAll(`#dz-${id}-${z.id} .drag-it`)).map(el=>el.dataset.item);
   });
   S.respostas[MA.id][id]=resultado;
+  salvar();
   notif('Registrado','neutro');
   setTimeout(()=>advDesafio(id),350);
 }
@@ -1087,6 +1124,7 @@ function concluir(){
   const ganho=Math.round(MA.xp*(0.5+pct/200));
   S.xp=Math.min(S.xp+ganho,S.xpMax);
   if(!S.concluidas.includes(MA.id)) S.concluidas.push(MA.id);
+  salvar();
 
   document.getElementById('m-emoji').textContent=pct>=75?'◆':pct>=50?'◇':'○';
   document.getElementById('m-titulo').textContent='Módulo Concluído';
@@ -1163,6 +1201,20 @@ function notif(txt,tipo){
   el.className=`notif ${tipo}`; el.textContent=txt;
   document.body.appendChild(el); setTimeout(()=>el.remove(),1600);
 }
+
+// Auto-restaurar sessão ao carregar a página
+window.addEventListener('DOMContentLoaded', ()=>{
+  if(S.nome){
+    document.getElementById('badge-nome').textContent = S.nome.split(' ')[0].toUpperCase();
+    document.getElementById('tela-cadastro').style.display='none';
+    document.getElementById('jogo').style.display='flex';
+    if(S.concluidas.length === MISSOES.length){
+      finalizar();
+    } else {
+      renderMapa();
+    }
+  }
+});
 </script>
 </body>
 </html>
