@@ -1074,15 +1074,23 @@ function initDrag(d){
 
 // ---- concluir ----
 function concluir(){
-  const objD=MA.desafios.filter(d=>d.tipo!=='ens'&&d.tipo!=='drag').length;
-  const pct=objD>0?Math.round((acertos/objD)*100):100;
+  // Recalcula acertos diretamente das respostas salvas (não depende da variável global)
+  const objDesafios = MA.desafios.filter(d=>d.tipo!=='ens'&&d.tipo!=='drag');
+  const objD = objDesafios.length;
+  let acertosCalc = 0;
+  objDesafios.forEach(d => {
+    const resp = S.respostas[MA.id][d.id];
+    if(resp !== undefined && resp === d.correta) acertosCalc++;
+  });
+
+  const pct=objD>0?Math.round((acertosCalc/objD)*100):100;
   const ganho=Math.round(MA.xp*(0.5+pct/200));
   S.xp=Math.min(S.xp+ganho,S.xpMax);
   if(!S.concluidas.includes(MA.id)) S.concluidas.push(MA.id);
 
   document.getElementById('m-emoji').textContent=pct>=75?'◆':pct>=50?'◇':'○';
   document.getElementById('m-titulo').textContent='Módulo Concluído';
-  document.getElementById('m-acerto').textContent=`${acertos}/${objD} respostas corretas (${pct}%)`;
+  document.getElementById('m-acerto').textContent=`${acertosCalc}/${objD} respostas corretas (${pct}%)`;
   document.getElementById('m-xp').textContent=`+${ganho} XP`;
   document.getElementById('m-msg').textContent=pct>=75
     ?'Excelente desempenho. Conceitos bem assimilados.'
