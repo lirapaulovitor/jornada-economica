@@ -3,33 +3,54 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>A Grande Jornada Econômica</title>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+<title>Jornada Econômica — Conjuntura e Globalização</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Source+Sans+3:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #1a1a2e;
-    --paper: #fdf6e3;
-    --panel-bg: #fff9f0;
-    --red: #c0392b;
-    --yellow: #f39c12;
-    --blue: #2471a3;
-    --green: #1e8449;
-    --purple: #7d3c98;
-    --orange: #d35400;
-    --teal: #117a65;
-    --shadow: 3px 3px 0 #1a1a2e;
-    --border: 3px solid #1a1a2e;
+    --bg: #0f1118;
+    --surface: #181b25;
+    --surface2: #1e2230;
+    --surface3: #252938;
+    --border: #2e3348;
+    --border-light: #3a3f54;
+    --text: #e8e6e1;
+    --text-muted: #9b97a0;
+    --text-dim: #6b6776;
+    --gold: #d4a843;
+    --gold-soft: #b8942e;
+    --gold-bg: rgba(212,168,67,0.08);
+    --gold-border: rgba(212,168,67,0.25);
+    --accent: #5b8fd9;
+    --accent-bg: rgba(91,143,217,0.08);
+    --accent-border: rgba(91,143,217,0.25);
+    --green: #4caf7d;
+    --green-bg: rgba(76,175,125,0.1);
+    --green-border: rgba(76,175,125,0.3);
+    --red: #d45b5b;
+    --red-bg: rgba(212,91,91,0.1);
+    --red-border: rgba(212,91,91,0.3);
+    --purple: #9b7bd4;
+    --purple-bg: rgba(155,123,212,0.08);
+    --purple-border: rgba(155,123,212,0.25);
+    --teal: #4db6a0;
+    --teal-bg: rgba(77,182,160,0.08);
+    --orange: #d4874a;
+    --orange-bg: rgba(212,135,74,0.08);
+    --orange-border: rgba(212,135,74,0.25);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Source Sans 3', -apple-system, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+    --radius: 6px;
+    --transition: 0.2s ease;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
-    font-family: 'Comic Neue', cursive;
-    background: var(--paper);
-    color: var(--ink);
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
     overflow-x: hidden;
-    background-image:
-      radial-gradient(circle at 20px 20px, rgba(0,0,0,0.025) 1px, transparent 0),
-      radial-gradient(circle at 60px 60px, rgba(0,0,0,0.025) 1px, transparent 0);
-    background-size: 80px 80px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
   /* ===== TELA CADASTRO ===== */
@@ -37,302 +58,414 @@
     min-height: 100vh; display: flex; flex-direction: column;
     align-items: center; justify-content: center; padding: 2rem; position: relative;
   }
+  #tela-cadastro::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 600px 400px at 20% 30%, rgba(212,168,67,0.06), transparent),
+      radial-gradient(ellipse 500px 500px at 80% 70%, rgba(91,143,217,0.04), transparent);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 4px; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1rem; opacity: 0;
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
   .hero-title {
-    font-family: 'Bangers', cursive;
-    font-size: clamp(2.8rem, 7vw, 5.5rem);
-    color: var(--ink);
-    text-shadow: 4px 4px 0 var(--red), 7px 7px 0 rgba(0,0,0,0.15);
-    letter-spacing: 4px; text-align: center; line-height: 1;
-    animation: tituloEntrada 0.8s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
+    font-family: var(--serif); font-size: clamp(2.4rem, 6vw, 4.2rem);
+    color: var(--text); text-align: center; line-height: 1.15;
+    letter-spacing: -0.5px; opacity: 0;
+    animation: fadeUp 0.6s 0.3s forwards;
   }
-  @keyframes tituloEntrada {
-    from { transform: scale(0.3) rotate(-5deg); opacity:0; }
-    to   { transform: scale(1) rotate(0deg); opacity:1; }
-  }
+  .hero-title em { color: var(--gold); font-style: italic; }
   .hero-sub {
-    font-family: 'Permanent Marker', cursive;
-    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-    color: var(--blue); text-align: center;
-    margin: 1rem 0 2rem;
-    border: var(--border); background: var(--yellow);
-    padding: 0.5rem 1.5rem; transform: rotate(-1deg);
-    box-shadow: var(--shadow);
-    animation: balanco 3s ease-in-out infinite;
+    font-size: 1rem; color: var(--text-muted); text-align: center;
+    margin: 1rem 0 2.5rem; max-width: 480px; font-weight: 300;
+    opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
   }
-  @keyframes balanco { 0%,100%{transform:rotate(-1deg)} 50%{transform:rotate(1deg)} }
-  @keyframes flutuando { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   .cadastro-card {
-    background: white; border: var(--border);
-    box-shadow: 6px 6px 0 var(--ink); padding: 2rem;
-    width: 100%; max-width: 460px; position: relative;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2rem 2rem 1.5rem;
+    width: 100%; max-width: 420px; position: relative;
+    opacity: 0; animation: fadeUp 0.6s 0.6s forwards;
   }
-  .form-titulo { font-family:'Bangers',cursive; font-size:1.8rem; letter-spacing:2px; text-align:center; margin-bottom:1.5rem; color:var(--red); }
-  .form-campo { margin-bottom:1.1rem; }
-  .form-campo label { display:block; font-weight:700; font-size:0.85rem; margin-bottom:0.35rem; text-transform:uppercase; letter-spacing:1px; }
+  .form-titulo {
+    font-family: var(--serif); font-size: 1.3rem;
+    text-align: center; margin-bottom: 1.5rem; color: var(--text);
+  }
+  .form-campo { margin-bottom: 1rem; }
+  .form-campo label {
+    display: block; font-weight: 600; font-size: 0.72rem;
+    margin-bottom: 0.35rem; text-transform: uppercase;
+    letter-spacing: 1.5px; color: var(--text-muted);
+  }
   .form-campo input {
-    width:100%; padding:0.65rem 1rem; border:3px solid var(--ink);
-    font-family:'Comic Neue',cursive; font-size:1rem; background:var(--paper);
-    transition:all 0.2s; box-shadow:3px 3px 0 var(--ink);
+    width: 100%; padding: 0.7rem 0.9rem; border: 1px solid var(--border);
+    border-radius: var(--radius); font-family: var(--sans); font-size: 0.95rem;
+    background: var(--surface2); color: var(--text); transition: var(--transition);
   }
-  .form-campo input:focus { outline:none; background:#fffde7; transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--ink); }
+  .form-campo input:focus {
+    outline: none; border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(212,168,67,0.15);
+  }
+  .form-campo input::placeholder { color: var(--text-dim); }
   .btn-iniciar {
-    width:100%; padding:1rem; background:var(--red); color:white;
-    font-family:'Bangers',cursive; font-size:1.9rem; letter-spacing:3px;
-    border:3px solid var(--ink); cursor:pointer;
-    box-shadow:5px 5px 0 var(--ink); transition:all 0.15s; margin-top:0.5rem;
+    width: 100%; padding: 0.85rem; background: var(--gold);
+    color: var(--bg); font-family: var(--sans); font-size: 0.85rem;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    border: none; border-radius: var(--radius); cursor: pointer;
+    transition: var(--transition); margin-top: 0.5rem;
   }
-  .btn-iniciar:hover { background:#e74c3c; transform:translate(-2px,-2px); box-shadow:7px 7px 0 var(--ink); }
-  .btn-iniciar:active { transform:translate(3px,3px); box-shadow:2px 2px 0 var(--ink); }
+  .btn-iniciar:hover { background: #e0b44e; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(212,168,67,0.25); }
+  .btn-iniciar:active { transform: translateY(0); }
 
   /* ===== HEADER ===== */
-  #jogo { display:none; min-height:100vh; flex-direction:column; }
+  #jogo { display: none; min-height: 100vh; flex-direction: column; }
   .game-header {
-    background: var(--ink); padding:0.7rem 1.5rem;
-    display:flex; align-items:center; justify-content:space-between;
-    flex-wrap:wrap; gap:0.5rem; position:sticky; top:0; z-index:50;
-    border-bottom:4px solid var(--yellow);
+    background: var(--surface); padding: 0 1.5rem; height: 54px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 50;
+    border-bottom: 1px solid var(--border);
   }
-  .game-title-hdr { font-family:'Bangers',cursive; color:white; font-size:1.4rem; letter-spacing:3px; }
-  .player-info { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
-  .player-badge { background:var(--yellow); color:var(--ink); font-weight:700; padding:0.3rem 0.8rem; border:2px solid white; font-size:0.85rem; }
-  .xp-wrap { display:flex; align-items:center; gap:0.5rem; }
-  .xp-lbl { color:#aaa; font-size:0.75rem; font-weight:700; }
-  .xp-outer { width:120px; height:13px; background:#333; border:2px solid var(--yellow); overflow:hidden; }
-  .xp-inner { height:100%; background:linear-gradient(90deg,var(--yellow),var(--orange)); transition:width 0.8s cubic-bezier(0.175,0.885,0.32,1.275); width:0%; }
-  .xp-val { color:var(--yellow); font-size:0.75rem; font-family:'Bangers',cursive; letter-spacing:1px; }
+  .game-title-hdr {
+    font-family: var(--serif); font-size: 1rem; color: var(--text);
+    white-space: nowrap;
+  }
+  .player-info { display: flex; align-items: center; gap: 1.2rem; }
+  .player-badge {
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 600;
+    color: var(--gold); letter-spacing: 1px;
+  }
+  .xp-wrap { display: flex; align-items: center; gap: 0.5rem; }
+  .xp-lbl { color: var(--text-dim); font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .xp-outer { width: 100px; height: 4px; background: var(--surface3); border-radius: 2px; overflow: hidden; }
+  .xp-inner { height: 100%; background: linear-gradient(90deg, var(--gold-soft), var(--gold)); transition: width 0.8s cubic-bezier(0.175,0.885,0.32,1.275); width: 0%; border-radius: 2px; }
+  .xp-val { color: var(--text-muted); font-size: 0.7rem; font-family: var(--mono); }
+  .missoes-hdr { color: var(--text-dim); font-size: 0.65rem; font-family: var(--mono); letter-spacing: 1px; }
 
   /* ===== MAPA ===== */
-  #tela-mapa { padding:2rem; flex:1; }
-  .mapa-titulo { font-family:'Bangers',cursive; font-size:2.5rem; letter-spacing:3px; text-align:center; margin-bottom:0.4rem; }
-  .mapa-sub { text-align:center; color:#666; margin-bottom:2rem; font-size:0.95rem; }
-  .missoes-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto; }
+  #tela-mapa { padding: 2.5rem 2rem; flex: 1; }
+  .mapa-titulo { font-family: var(--serif); font-size: 2rem; text-align: center; margin-bottom: 0.3rem; }
+  .mapa-sub { text-align: center; color: var(--text-muted); margin-bottom: 2.5rem; font-size: 0.9rem; font-weight: 300; }
+  .missoes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; max-width: 1100px; margin: 0 auto; }
 
   .missao-card {
-    background:var(--panel-bg); border:3px solid var(--ink);
-    box-shadow:5px 5px 0 var(--ink); cursor:pointer; transition:all 0.15s; position:relative; overflow:hidden;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); cursor: pointer; transition: var(--transition);
+    position: relative; overflow: hidden;
   }
-  .missao-card:hover:not(.bloqueada) { transform:translate(-3px,-3px); box-shadow:8px 8px 0 var(--ink); }
-  .missao-card.bloqueada { opacity:0.5; cursor:not-allowed; filter:grayscale(0.4); }
-  .missao-card.concluida { border-color:var(--green); box-shadow:5px 5px 0 var(--green); }
-  .missao-card.concluida::after {
-    content:'✓ COMPLETA'; position:absolute; top:12px; right:-28px;
-    background:var(--green); color:white; font-family:'Bangers',cursive;
-    font-size:0.8rem; letter-spacing:2px; padding:3px 38px; transform:rotate(35deg);
+  .missao-card:hover:not(.bloqueada) { border-color: var(--gold-border); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+  .missao-card.bloqueada { opacity: 0.4; cursor: not-allowed; }
+  .missao-card.concluida { border-color: var(--green-border); }
+  .missao-card.concluida .missao-status-bar { background: var(--green); }
+  .missao-status-bar { height: 3px; background: var(--border); transition: var(--transition); }
+  .missao-card:not(.bloqueada):not(.concluida) .missao-status-bar { background: var(--gold); }
+  .missao-body { padding: 1.2rem; }
+  .missao-top { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.6rem; }
+  .missao-num {
+    font-family: var(--mono); font-size: 0.65rem; font-weight: 600;
+    color: var(--text-dim); letter-spacing: 1px; flex-shrink: 0;
   }
-  .missao-banner { height:110px; display:flex; align-items:center; justify-content:center; font-size:3.8rem; position:relative; overflow:hidden; }
-  .missao-id { position:absolute; top:8px; left:10px; font-family:'Bangers',cursive; font-size:0.8rem; color:rgba(255,255,255,0.7); letter-spacing:2px; }
-  .missao-body { padding:1rem; border-top:3px solid var(--ink); }
-  .missao-nome { font-family:'Bangers',cursive; font-size:1.35rem; letter-spacing:2px; margin-bottom:0.3rem; }
-  .missao-desc { font-size:0.83rem; color:#555; line-height:1.5; margin-bottom:0.8rem; }
-  .missao-meta { display:flex; justify-content:space-between; align-items:center; }
-  .missao-xp { background:var(--yellow); color:var(--ink); font-weight:700; font-size:0.72rem; padding:3px 8px; border:2px solid var(--ink); }
-  .missao-status { font-size:0.68rem; font-weight:700; padding:3px 8px; border:2px solid; }
-  .s-disp { color:var(--blue); border-color:var(--blue); }
-  .s-blq  { color:#aaa; border-color:#aaa; }
-  .s-ok   { color:var(--green); border-color:var(--green); }
+  .missao-nome { font-family: var(--serif); font-size: 1.15rem; color: var(--text); line-height: 1.3; }
+  .missao-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.8rem; font-weight: 300; }
+  .missao-meta { display: flex; justify-content: space-between; align-items: center; }
+  .missao-xp {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--gold);
+    letter-spacing: 0.5px;
+  }
+  .missao-status {
+    font-family: var(--mono); font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .s-disp { color: var(--gold); }
+  .s-blq  { color: var(--text-dim); }
+  .s-ok   { color: var(--green); }
 
   /* ===== TELA MISSÃO ===== */
-  #tela-missao { display:none; flex-direction:column; min-height:calc(100vh - 60px); }
-  .mc { max-width:860px; margin:0 auto; padding:2rem; width:100%; }
+  #tela-missao { display: none; flex-direction: column; min-height: calc(100vh - 54px); }
+  .mc { max-width: 780px; margin: 0 auto; padding: 2rem; width: 100%; }
 
-  .prog-bar { background:#e0e0e0; height:9px; border:2px solid var(--ink); margin-bottom:1.5rem; overflow:hidden; }
-  .prog-fill { height:100%; background:var(--orange); transition:width 0.5s ease; }
+  .missao-header-bar {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+  }
+  .missao-meta-info { flex: 1; }
+  .missao-meta-title { font-family: var(--serif); font-size: 1.3rem; color: var(--text); margin-bottom: 0.15rem; }
+  .missao-meta-sub { font-family: var(--mono); font-size: 0.7rem; color: var(--text-dim); letter-spacing: 1px; }
 
-  /* Painel HQ */
+  .prog-bar { background: var(--surface3); height: 3px; border-radius: 2px; margin-bottom: 2rem; overflow: hidden; }
+  .prog-fill { height: 100%; background: var(--gold); transition: width 0.5s ease; border-radius: 2px; }
+
+  /* Painel narrativo */
   .panel {
-    border:3px solid var(--ink); background:white; margin-bottom:1.5rem;
-    box-shadow:5px 5px 0 var(--ink); overflow:hidden;
-    animation:entradaPanel 0.35s ease forwards;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); margin-bottom: 1.5rem; overflow: hidden;
+    animation: panelIn 0.35s ease forwards;
   }
-  @keyframes entradaPanel { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes panelIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
 
-  .panel-topo { display:flex; align-items:flex-start; gap:1rem; padding:1rem; border-bottom:3px solid var(--ink); }
-  .panel-char { width:76px; height:76px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:2.8rem; background:var(--paper); border:2px solid var(--ink); animation:flutuando 3s ease-in-out infinite; }
-  .panel-nome { font-family:'Bangers',cursive; font-size:0.9rem; letter-spacing:2px; color:var(--red); margin-bottom:0.3rem; }
+  .panel-topo { display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem; }
+  .panel-char {
+    width: 44px; height: 44px; flex-shrink: 0; display: flex; align-items: center;
+    justify-content: center; font-size: 1.5rem; background: var(--surface3);
+    border-radius: var(--radius); border: 1px solid var(--border);
+  }
+  .panel-nome {
+    font-family: var(--mono); font-size: 0.65rem; font-weight: 600;
+    letter-spacing: 2px; color: var(--gold); margin-bottom: 0.35rem;
+    text-transform: uppercase;
+  }
   .balao {
-    background:var(--paper); border:2.5px solid var(--ink); padding:0.75rem 1rem;
-    position:relative; font-size:0.9rem; line-height:1.65; border-radius:3px;
+    font-size: 0.9rem; line-height: 1.75; color: var(--text-muted);
+    font-weight: 300;
   }
-  .balao::before { content:''; position:absolute; left:-12px; top:12px; border-right:12px solid var(--ink); border-top:8px solid transparent; border-bottom:8px solid transparent; }
-  .balao::after  { content:''; position:absolute; left:-8px;  top:13px; border-right:10px solid var(--paper); border-top:7px solid transparent; border-bottom:7px solid transparent; }
+  .balao strong { color: var(--text); font-weight: 600; }
 
-  /* Cena animada */
-  .cena-anim { min-height:150px; background:var(--ink); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
-  .cena-els { display:flex; align-items:center; gap:1.8rem; font-size:3.2rem; position:relative; z-index:2; }
-  .cena-el { animation:flutuando 2.5s ease-in-out infinite; text-shadow:2px 2px 0 rgba(0,0,0,0.5); }
-  .cena-el:nth-child(2){animation-delay:0.5s}
-  .cena-el:nth-child(3){animation-delay:1s}
-  .cena-el:nth-child(4){animation-delay:1.5s}
-  .cena-ttl { font-family:'Bangers',cursive; color:var(--yellow); font-size:1.6rem; letter-spacing:3px; position:absolute; bottom:10px; left:0; right:0; text-align:center; text-shadow:2px 2px 0 rgba(0,0,0,0.6); }
+  /* Cena visual */
+  .cena-anim {
+    min-height: 80px; background: var(--surface3);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; padding: 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .cena-els { display: flex; align-items: center; gap: 1.5rem; font-size: 1.8rem; }
+  .cena-ttl {
+    font-family: var(--mono); color: var(--gold); font-size: 0.7rem;
+    letter-spacing: 3px; text-transform: uppercase; font-weight: 600;
+    margin-left: 1.5rem;
+  }
 
-  /* Box conceito — cor parametrizável */
+  /* Box conceito */
   .conceito {
-    border:3px solid var(--c,#2471a3); background:var(--cb,#e8f4fd);
-    padding:1.1rem; margin-bottom:1.5rem; position:relative;
-    box-shadow:4px 4px 0 var(--c,#2471a3);
+    border: 1px solid var(--c-bdr, var(--accent-border));
+    background: var(--c-bg, var(--accent-bg));
+    padding: 1.2rem; margin-bottom: 1.5rem; border-radius: var(--radius);
+    position: relative;
   }
-  .conceito::before {
-    content:attr(data-label);
-    position:absolute; top:-13px; left:12px;
-    background:var(--c,#2471a3); color:white;
-    font-size:0.68rem; font-weight:700; padding:2px 8px; letter-spacing:2px;
+  .conceito-label {
+    font-family: var(--mono); font-size: 0.6rem; font-weight: 600;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--c-clr, var(--accent)); margin-bottom: 0.6rem;
   }
-  .conceito-ttl { font-family:'Bangers',cursive; font-size:1.15rem; letter-spacing:2px; margin-bottom:0.4rem; }
-  .conceito-txt { font-size:0.88rem; line-height:1.75; color:#2c3e50; }
-  .conceito strong { font-weight:700; }
+  .conceito-ttl { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text); }
+  .conceito-txt { font-size: 0.88rem; line-height: 1.8; color: var(--text-muted); font-weight: 300; }
+  .conceito-txt strong { color: var(--text); font-weight: 600; }
 
   /* ===== DESAFIOS ===== */
   .desafio {
-    border:3px solid var(--ink); background:white;
-    box-shadow:5px 5px 0 var(--ink); margin-bottom:1.5rem; overflow:hidden;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); margin-bottom: 1.5rem; overflow: hidden;
   }
   .desafio-hdr {
-    background:var(--ink); color:white; padding:0.75rem 1rem;
-    display:flex; align-items:center; gap:0.8rem;
+    padding: 0.8rem 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface2);
   }
   .d-num {
-    background:var(--yellow); color:var(--ink); font-family:'Bangers',cursive;
-    font-size:1.15rem; width:34px; height:34px; display:flex; align-items:center;
-    justify-content:center; flex-shrink:0; border:2px solid white;
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 600;
+    color: var(--gold); width: 28px; height: 28px; display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+    border: 1px solid var(--gold-border); border-radius: var(--radius);
+    background: var(--gold-bg);
   }
-  .d-titulo { font-family:'Bangers',cursive; font-size:1.05rem; letter-spacing:2px; }
-  .d-tipo { margin-left:auto; font-size:0.63rem; font-weight:700; padding:3px 7px; letter-spacing:1px; text-transform:uppercase; }
-  .d-mc   { background:var(--blue); }
-  .d-vf   { background:var(--teal); }
-  .d-drag { background:var(--purple); }
-  .d-ens  { background:var(--orange); }
-  .d-body { padding:1.1rem; }
-  .d-pergunta { font-size:0.95rem; font-weight:700; line-height:1.65; margin-bottom:1rem; }
+  .d-titulo { font-family: var(--serif); font-size: 0.95rem; color: var(--text); }
+  .d-tipo {
+    margin-left: auto; font-family: var(--mono); font-size: 0.55rem;
+    font-weight: 600; padding: 3px 8px; letter-spacing: 1.5px;
+    text-transform: uppercase; border-radius: 3px;
+  }
+  .d-mc   { background: var(--accent-bg); color: var(--accent); border: 1px solid var(--accent-border); }
+  .d-vf   { background: var(--teal-bg); color: var(--teal); border: 1px solid rgba(77,182,160,0.25); }
+  .d-drag { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+  .d-ens  { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+  .d-body { padding: 1.2rem; }
+  .d-pergunta { font-size: 0.92rem; font-weight: 400; line-height: 1.7; margin-bottom: 1rem; color: var(--text); }
 
   /* Opções MC */
-  .opcoes { display:flex; flex-direction:column; gap:0.55rem; }
+  .opcoes { display: flex; flex-direction: column; gap: 0.5rem; }
   .opcao {
-    width:100%; text-align:left; padding:0.65rem 0.9rem; border:2.5px solid var(--ink);
-    background:var(--paper); cursor:pointer; font-family:'Comic Neue',cursive;
-    font-size:0.88rem; line-height:1.5; transition:all 0.15s;
-    display:flex; align-items:flex-start; gap:0.55rem;
-    box-shadow:3px 3px 0 var(--ink);
+    width: 100%; text-align: left; padding: 0.7rem 1rem;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--surface2); cursor: pointer; font-family: var(--sans);
+    font-size: 0.87rem; line-height: 1.55; transition: var(--transition);
+    display: flex; align-items: flex-start; gap: 0.6rem; color: var(--text);
   }
-  .opcao:hover:not(:disabled) { background:#fffde7; transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--ink); }
-  .opcao-ltr { font-family:'Bangers',cursive; font-size:1.05rem; color:var(--blue); flex-shrink:0; width:18px; }
-  .opcao.correta  { background:#d5f5e3; border-color:var(--green);  box-shadow:3px 3px 0 var(--green); }
-  .opcao.errada   { background:#fde8e8; border-color:var(--red);    box-shadow:3px 3px 0 var(--red); }
+  .opcao:hover:not(:disabled) { border-color: var(--gold-border); background: var(--gold-bg); }
+  .opcao-ltr {
+    font-family: var(--mono); font-size: 0.75rem; font-weight: 600;
+    color: var(--text-dim); flex-shrink: 0; width: 18px;
+  }
+  .opcao.correta { background: var(--green-bg); border-color: var(--green-border); }
+  .opcao.correta .opcao-ltr { color: var(--green); }
+  .opcao.errada { background: var(--red-bg); border-color: var(--red-border); }
+  .opcao.errada .opcao-ltr { color: var(--red); }
 
   /* V/F */
-  .vof-wrap { display:flex; gap:1rem; justify-content:center; margin-top:0.5rem; }
+  .vof-wrap { display: flex; gap: 0.8rem; justify-content: center; margin-top: 0.5rem; }
   .vof-btn {
-    flex:1; max-width:150px; padding:0.9rem;
-    font-family:'Bangers',cursive; font-size:1.6rem; letter-spacing:3px;
-    border:3px solid var(--ink); cursor:pointer; transition:all 0.15s;
-    box-shadow:4px 4px 0 var(--ink);
+    flex: 1; max-width: 160px; padding: 0.75rem;
+    font-family: var(--sans); font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 1px; text-transform: uppercase;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    cursor: pointer; transition: var(--transition); background: var(--surface2);
   }
-  .vof-btn.verd { background:#d5f5e3; color:var(--green); }
-  .vof-btn.fals { background:#fde8e8; color:var(--red); }
-  .vof-btn:hover:not(:disabled) { transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink); }
+  .vof-btn.verd { color: var(--green); }
+  .vof-btn.fals { color: var(--red); }
+  .vof-btn:hover:not(:disabled) { border-color: var(--gold-border); }
 
   /* Arrastar */
-  .drag-pool { display:flex; flex-wrap:wrap; gap:0.5rem; min-height:52px; padding:0.5rem; border:2px dashed #bbb; background:#fafafa; margin-bottom:1rem; }
+  .drag-pool {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; min-height: 48px;
+    padding: 0.6rem; border: 1px dashed var(--border-light);
+    border-radius: var(--radius); background: var(--surface2); margin-bottom: 1rem;
+  }
   .drag-it {
-    padding:0.4rem 0.75rem; border:2.5px solid var(--ink); background:var(--yellow);
-    cursor:grab; font-weight:700; font-size:0.83rem; box-shadow:2px 2px 0 var(--ink);
-    user-select:none; transition:all 0.1s;
+    padding: 0.45rem 0.8rem; border: 1px solid var(--gold-border);
+    background: var(--gold-bg); border-radius: var(--radius);
+    cursor: grab; font-weight: 600; font-size: 0.8rem; color: var(--gold);
+    user-select: none; transition: var(--transition);
   }
-  .drag-it:hover { transform:rotate(-2deg) scale(1.04); }
-  .drag-it.dragging { opacity:0.45; }
-  .drop-cols { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
-  .drop-col-lbl { font-family:'Bangers',cursive; font-size:0.95rem; letter-spacing:2px; margin-bottom:0.4rem; }
+  .drag-it:hover { background: rgba(212,168,67,0.15); }
+  .drag-it.dragging { opacity: 0.4; }
+  .drop-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+  .drop-col-lbl {
+    font-family: var(--mono); font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 1.5px; margin-bottom: 0.4rem; text-transform: uppercase;
+  }
   .drop-zone {
-    min-height:52px; border:3px dashed; padding:0.4rem;
-    display:flex; align-items:flex-start; flex-wrap:wrap; gap:0.35rem; transition:all 0.2s;
+    min-height: 52px; border: 1px dashed; padding: 0.5rem;
+    display: flex; align-items: flex-start; flex-wrap: wrap; gap: 0.4rem;
+    transition: var(--transition); border-radius: var(--radius);
   }
-  .drop-zone.dz-a { border-color:var(--blue); background:#eaf2fb; }
-  .drop-zone.dz-b { border-color:var(--red);  background:#fdf2f2; }
-  .drop-zone.dz-c { border-color:var(--green); background:#eafaf1; }
-  .drop-zone.drag-over { border-style:solid; box-shadow:3px 3px 0 currentColor; }
+  .drop-zone.dz-a { border-color: var(--accent-border); background: var(--accent-bg); }
+  .drop-zone.dz-b { border-color: var(--red-border); background: var(--red-bg); }
+  .drop-zone.dz-c { border-color: var(--green-border); background: var(--green-bg); }
+  .drop-zone.drag-over { border-style: solid; }
 
   /* Dissertativa */
   .textarea-d {
-    width:100%; min-height:95px; padding:0.75rem;
-    border:2.5px solid var(--ink); font-family:'Comic Neue',cursive;
-    font-size:0.88rem; line-height:1.6; resize:vertical; background:var(--paper);
-    box-shadow:3px 3px 0 var(--ink);
+    width: 100%; min-height: 100px; padding: 0.8rem;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    font-family: var(--sans); font-size: 0.88rem; line-height: 1.65;
+    resize: vertical; background: var(--surface2); color: var(--text);
   }
-  .textarea-d:focus { outline:none; background:#fffde7; }
+  .textarea-d:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,168,67,0.1); }
 
   /* Feedback */
-  .feedback { margin-top:0.9rem; padding:0.75rem; border:2.5px solid; font-weight:700; font-size:0.87rem; line-height:1.5; display:none; }
-  .feedback.ok  { border-color:var(--green); background:#d5f5e3; color:#1e8449; display:block; }
-  .feedback.err { border-color:var(--red);   background:#fde8e8; color:var(--red);   display:block; }
+  .feedback {
+    margin-top: 0.9rem; padding: 0.8rem 1rem; border-radius: var(--radius);
+    font-size: 0.85rem; line-height: 1.6; display: none; border: 1px solid;
+  }
+  .feedback.ok  { border-color: var(--green-border); background: var(--green-bg); color: var(--green); display: block; }
+  .feedback.err { border-color: var(--red-border); background: var(--red-bg); color: var(--red); display: block; }
 
   /* Botões */
   .btn-conf {
-    background:var(--blue); color:white; font-family:'Bangers',cursive;
-    font-size:1.25rem; letter-spacing:2px; padding:0.65rem 1.8rem;
-    border:3px solid var(--ink); cursor:pointer;
-    box-shadow:4px 4px 0 var(--ink); transition:all 0.15s; margin-top:0.9rem; display:block;
+    background: var(--gold); color: var(--bg); font-family: var(--sans);
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 0.65rem 1.5rem;
+    border: none; border-radius: var(--radius); cursor: pointer;
+    transition: var(--transition); margin-top: 0.9rem; display: inline-block;
   }
-  .btn-conf:hover:not(:disabled) { background:#1a6fa0; transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink); }
-  .btn-conf:disabled { opacity:0.45; cursor:not-allowed; }
-  .btn-nav { padding:0.65rem 1.4rem; border:3px solid var(--ink); font-family:'Bangers',cursive; font-size:1.1rem; letter-spacing:2px; cursor:pointer; box-shadow:4px 4px 0 var(--ink); transition:all 0.15s; }
-  .btn-nav:hover { transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--ink); }
-  .btn-voltar  { background:white; }
-  .btn-concluir{ background:var(--green); color:white; }
-  .btn-concluir:disabled { opacity:0.45; cursor:not-allowed; transform:none; }
-  .btn-cont    { background:var(--blue); color:white; }
+  .btn-conf:hover:not(:disabled) { background: #e0b44e; }
+  .btn-conf:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-nav {
+    padding: 0.55rem 1.2rem; border: 1px solid var(--border);
+    border-radius: var(--radius); font-family: var(--sans); font-size: 0.8rem;
+    font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+    cursor: pointer; transition: var(--transition); background: var(--surface2); color: var(--text);
+  }
+  .btn-nav:hover { border-color: var(--gold-border); color: var(--gold); }
+  .btn-voltar  { }
+  .btn-concluir{ background: var(--green); color: white; border-color: var(--green); }
+  .btn-concluir:hover { background: #5bc48d; }
+  .btn-concluir:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-cont { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+  .btn-cont:hover { background: #e0b44e; color: var(--bg); }
 
   /* Modal resultado */
-  #modal-res { display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.72); z-index:1000; align-items:center; justify-content:center; padding:1rem; }
-  #modal-res.ativo { display:flex; }
-  .res-card {
-    background:var(--paper); border:4px solid var(--ink); box-shadow:10px 10px 0 var(--ink);
-    padding:2rem; max-width:460px; width:100%; text-align:center;
-    animation:tituloEntrada 0.5s cubic-bezier(0.175,0.885,0.32,1.275) forwards;
+  #modal-res {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
+    z-index: 1000; align-items: center; justify-content: center; padding: 1rem;
   }
-  .res-emoji { font-size:5rem; display:block; margin-bottom:1rem; animation:flutuando 2s ease-in-out infinite; }
-  .res-titulo { font-family:'Bangers',cursive; font-size:2.4rem; letter-spacing:4px; margin-bottom:0.4rem; color:var(--red); }
-  .res-acerto { font-family:'Bangers',cursive; font-size:1.45rem; color:var(--green); letter-spacing:2px; }
-  .res-xp     { font-family:'Bangers',cursive; font-size:2rem; color:var(--yellow); letter-spacing:3px; margin:0.9rem 0; text-shadow:2px 2px 0 var(--ink); }
-  .res-msg    { font-size:0.92rem; color:#555; line-height:1.6; margin-bottom:1.5rem; }
-
-  /* Confete */
-  .confete { position:fixed; width:10px; height:10px; z-index:2000; pointer-events:none; animation:cair 3s linear forwards; }
-  @keyframes cair { 0%{transform:translateY(-20px) rotate(0);opacity:1} 100%{transform:translateY(100vh) rotate(720deg);opacity:0} }
-
-  .onom { position:absolute; font-family:'Bangers',cursive; font-size:2.3rem; letter-spacing:3px; pointer-events:none; animation:boom 0.5s forwards; z-index:100; }
-  @keyframes boom { 0%{transform:scale(0) rotate(-10deg);opacity:1} 60%{transform:scale(1.3) rotate(5deg);opacity:1} 100%{transform:scale(1);opacity:0} }
-
-  /* Tela final */
-  #tela-final { display:none; min-height:calc(100vh - 60px); align-items:center; justify-content:center; flex-direction:column; padding:2rem; text-align:center; }
+  #modal-res.ativo { display: flex; }
+  .res-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 2.5rem 2rem; max-width: 420px;
+    width: 100%; text-align: center;
+    animation: fadeUp 0.4s ease forwards;
+  }
+  .res-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+  .res-titulo { font-family: var(--serif); font-size: 1.6rem; margin-bottom: 0.3rem; color: var(--text); }
+  .res-acerto { font-family: var(--mono); font-size: 0.85rem; color: var(--green); letter-spacing: 1px; }
+  .res-xp { font-family: var(--mono); font-size: 1.2rem; color: var(--gold); letter-spacing: 2px; margin: 0.8rem 0; }
+  .res-msg { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.5rem; font-weight: 300; }
 
   /* tap selection mobile */
   .drag-it.tap-sel {
-    outline: 3px solid var(--blue);
-    background: #d6eaf8;
-    transform: scale(1.06);
-    box-shadow: 4px 4px 0 var(--blue);
+    outline: 2px solid var(--accent);
+    background: var(--accent-bg);
+    color: var(--accent);
   }
-  .drop-zone { min-height: 58px; cursor: pointer; }
+  .drop-zone { min-height: 54px; cursor: pointer; }
+
+  /* Tela final */
+  #tela-final {
+    display: none; min-height: calc(100vh - 54px); align-items: center;
+    justify-content: center; flex-direction: column; padding: 2rem; text-align: center;
+  }
+  .final-icon { font-size: 3rem; margin-bottom: 1.5rem; }
+  .final-titulo { font-family: var(--serif); font-size: 2.2rem; color: var(--text); margin-bottom: 0.5rem; }
+  .final-xp { font-family: var(--mono); font-size: 1.1rem; color: var(--gold); letter-spacing: 2px; margin-bottom: 2rem; }
+  .final-box {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.5rem; max-width: 560px; font-size: 0.9rem; line-height: 1.8;
+    color: var(--text-muted); font-weight: 300; margin-bottom: 2rem;
+  }
+  .final-box strong { color: var(--text); font-weight: 600; }
+
+  .envio-status {
+    margin-top: 1rem; padding: 0.7rem 1rem; border-radius: var(--radius);
+    font-size: 0.82rem; text-align: center; display: none; border: 1px solid;
+  }
+  .envio-status.ok { display: block; border-color: var(--green-border); background: var(--green-bg); color: var(--green); }
+  .envio-status.err { display: block; border-color: var(--red-border); background: var(--red-bg); color: var(--red); }
+  .envio-status.wait { display: block; border-color: var(--gold-border); background: var(--gold-bg); color: var(--gold); }
+
+  /* Notificação flutuante de acerto/erro */
+  .notif {
+    position: fixed; top: 70px; right: 20px; z-index: 200;
+    font-family: var(--mono); font-size: 0.75rem; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 0.6rem 1.2rem; border-radius: var(--radius);
+    animation: notifIn 0.3s ease, notifOut 0.3s 1.2s ease forwards;
+    pointer-events: none;
+  }
+  .notif.ok { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .notif.nok { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+  .notif.neutro { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+  @keyframes notifIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes notifOut { to { opacity: 0; transform: translateY(-10px); } }
 
   @media(max-width:580px){
-    .drop-cols{grid-template-columns:1fr}
-    .panel-topo{flex-direction:column}
-    .balao::before,.balao::after{display:none}
-    /* Itens maiores no mobile para facilitar o toque */
-    .drag-it { padding: 0.6rem 1rem; font-size:0.92rem; }
-    .opcao { padding: 0.75rem 0.9rem; font-size: 0.92rem; }
-    .vof-btn { font-size: 1.4rem; padding: 0.85rem; }
-    .btn-conf { font-size: 1.1rem; padding: 0.7rem 1.5rem; }
-    .btn-nav { font-size: 1rem; padding: 0.6rem 1.2rem; }
-    .d-body { padding: 1rem; }
-    .d-pergunta { font-size: 0.92rem; }
-    .textarea-d { min-height: 110px; font-size: 0.92rem; }
-    .game-header { padding: 0.6rem 1rem; }
-    .xp-outer { width: 90px; }
-    /* Evita zoom no foco de input em iOS */
+    .drop-cols { grid-template-columns: 1fr; }
+    .panel-topo { flex-direction: column; }
+    .cena-anim { flex-direction: column; gap: 0.5rem; }
+    .cena-ttl { margin-left: 0; text-align: center; }
+    .drag-it { padding: 0.55rem 0.9rem; font-size: 0.85rem; }
+    .opcao { padding: 0.75rem 0.9rem; }
+    .vof-btn { padding: 0.7rem; }
     input, textarea, select { font-size: 16px !important; }
-    .mc { padding: 1rem; }
-    .missao-body { padding: 0.85rem; }
+    .mc { padding: 1.2rem; }
+    .game-header { padding: 0 1rem; }
+    .xp-outer { width: 70px; }
+    .missao-header-bar { gap: 0.6rem; }
   }
 </style>
 </head>
@@ -340,52 +473,17 @@
 
 <!-- ===================== CADASTRO ===================== -->
 <div id="tela-cadastro">
-  <svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0.05;z-index:0" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
-    <text x="30"  y="160" font-family="Bangers" font-size="200" fill="#1a1a2e">K</text>
-    <text x="450" y="320" font-family="Bangers" font-size="220" fill="#1a1a2e">$</text>
-    <text x="80"  y="560" font-family="Bangers" font-size="180" fill="#1a1a2e">PIB</text>
-    <text x="560" y="110" font-family="Bangers" font-size="160" fill="#1a1a2e">⚙</text>
-  </svg>
   <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;width:100%">
-    <div class="hero-title">A GRANDE<br>JORNADA<br>ECONÔMICA</div>
-    <div class="hero-sub">⚡ Conjuntura Econômica e Globalização ⚡</div>
-
-    <!-- Personagem SVG animado -->
-    <div style="width:160px;height:200px;margin:0.8rem 0;animation:flutuando 3s ease-in-out infinite">
-      <svg viewBox="0 0 160 200" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="80" cy="68" r="34" fill="#f5cba7" stroke="#1a1a2e" stroke-width="3"/>
-        <rect x="56" y="38" width="48" height="8" rx="2" fill="#1a1a2e"/>
-        <rect x="61" y="18" width="38" height="22" rx="3" fill="#2c3e50" stroke="#1a1a2e" stroke-width="2.5"/>
-        <circle cx="69" cy="65" r="5.5" fill="white" stroke="#1a1a2e" stroke-width="2"/>
-        <circle cx="91" cy="65" r="5.5" fill="white" stroke="#1a1a2e" stroke-width="2"/>
-        <circle cx="70" cy="66" r="3" fill="#1a1a2e"/><circle cx="92" cy="66" r="3" fill="#1a1a2e"/>
-        <circle cx="70.8" cy="64.5" r="1.2" fill="white"/><circle cx="92.8" cy="64.5" r="1.2" fill="white"/>
-        <path d="M70 80 Q80 89 90 80" stroke="#1a1a2e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-        <ellipse cx="62" cy="76" rx="7" ry="4.5" fill="#e74c3c" opacity="0.28"/>
-        <ellipse cx="98" cy="76" rx="7" ry="4.5" fill="#e74c3c" opacity="0.28"/>
-        <ellipse cx="80" cy="150" rx="38" ry="44" fill="#2c3e50" stroke="#1a1a2e" stroke-width="3"/>
-        <polygon points="80,87 89,118 80,131 71,118" fill="#c0392b" stroke="#1a1a2e" stroke-width="2"/>
-        <path d="M44 122 Q28 104 32 88" stroke="#2c3e50" stroke-width="9" stroke-linecap="round" fill="none"/>
-        <path d="M116 122 Q132 104 128 88" stroke="#2c3e50" stroke-width="9" stroke-linecap="round" fill="none"/>
-        <circle cx="31" cy="86" r="8" fill="#f5cba7" stroke="#1a1a2e" stroke-width="2"/>
-        <circle cx="129" cy="86" r="8" fill="#f5cba7" stroke="#1a1a2e" stroke-width="2"/>
-        <rect x="17" y="79" width="16" height="18" rx="2" fill="#c0392b" stroke="#1a1a2e" stroke-width="1.8"/>
-        <text x="25" y="92" text-anchor="middle" font-family="Bangers" font-size="7" fill="white">EPI</text>
-        <rect x="62" y="190" width="13" height="10" rx="3" fill="#1a1a2e"/>
-        <rect x="85" y="190" width="13" height="10" rx="3" fill="#1a1a2e"/>
-        <ellipse cx="130" cy="38" rx="26" ry="15" fill="white" stroke="#1a1a2e" stroke-width="2"/>
-        <polygon points="116,46 106,58 124,50" fill="white" stroke="#1a1a2e" stroke-width="2"/>
-        <text x="130" y="36" text-anchor="middle" font-family="Bangers" font-size="9" fill="#c0392b">PROD.</text>
-        <text x="130" y="48" text-anchor="middle" font-family="Bangers" font-size="8" fill="#2471a3">SOCIAL!</text>
-      </svg>
-    </div>
+    <div class="hero-label">Módulo Interativo</div>
+    <div class="hero-title">A Grande Jornada<br><em>Econômica</em></div>
+    <div class="hero-sub">Conjuntura Econômica e Globalização — um percurso em cinco módulos sobre reprodução material, propriedade, fatores de produção e contabilidade social.</div>
 
     <div class="cadastro-card">
-      <div class="form-titulo">⚔️ CRIE SEU PERFIL ⚔️</div>
-      <div class="form-campo"><label>Nome completo</label><input type="text" id="inp-nome" placeholder="Ex: Ana Silva" maxlength="80"/></div>
-      <div class="form-campo"><label>E-mail</label><input type="email" id="inp-email" placeholder="seu@email.com"/></div>
+      <div class="form-titulo">Identificação</div>
+      <div class="form-campo"><label>Nome completo</label><input type="text" id="inp-nome" placeholder="Seu nome" maxlength="80"/></div>
+      <div class="form-campo"><label>E-mail institucional</label><input type="email" id="inp-email" placeholder="seu@email.com"/></div>
       <div class="form-campo"><label>Matrícula / RA</label><input type="text" id="inp-mat" placeholder="Ex: 20231234"/></div>
-      <button class="btn-iniciar" onclick="iniciar()">⚡ COMEÇAR JORNADA ⚡</button>
+      <button class="btn-iniciar" onclick="iniciar()">Iniciar Atividade</button>
     </div>
   </div>
 </div>
@@ -393,20 +491,21 @@
 <!-- ===================== JOGO ===================== -->
 <div id="jogo">
   <header class="game-header">
-    <div class="game-title-hdr">⚡ A GRANDE JORNADA</div>
+    <div class="game-title-hdr">Jornada Econômica</div>
     <div class="player-info">
-      <div class="player-badge" id="badge-nome">AVENTUREIRO</div>
+      <div class="player-badge" id="badge-nome"></div>
       <div class="xp-wrap">
         <span class="xp-lbl">XP</span>
         <div class="xp-outer"><div class="xp-inner" id="xp-bar"></div></div>
-        <span class="xp-val" id="xp-val">0/500</span>
+        <span class="xp-val" id="xp-val">0/450</span>
       </div>
+      <span class="missoes-hdr" id="missoes-hdr">0/5</span>
     </div>
   </header>
 
   <div id="tela-mapa">
-    <div class="mapa-titulo">🗺️ MAPA DAS MISSÕES</div>
-    <div class="mapa-sub" id="mapa-sub">Escolha sua missão, aventureiro!</div>
+    <div class="mapa-titulo">Módulos</div>
+    <div class="mapa-sub" id="mapa-sub">Selecione um módulo para começar.</div>
     <div class="missoes-grid" id="missoes-grid"></div>
   </div>
 
@@ -415,14 +514,15 @@
   </div>
 
   <div id="tela-final">
-    <div style="max-width:580px;width:100%">
-      <div style="font-size:6rem;animation:flutuando 2s ease-in-out infinite">🏆</div>
-      <div style="font-family:'Bangers',cursive;font-size:3rem;letter-spacing:4px;color:var(--red);margin-bottom:1rem">JORNADA COMPLETA!</div>
-      <div style="font-family:'Bangers',cursive;font-size:1.5rem;color:var(--yellow);margin-bottom:2rem" id="final-xp">500 XP!</div>
-      <div style="background:white;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:1.5rem;margin-bottom:2rem;font-size:0.95rem;line-height:1.8;color:#444">
-        Você desvendou o segredo: a Economia não é a ciência das escolhas individuais diante da escassez — é o estudo da <strong>reprodução material da sociedade</strong>. Produção, acumulação e distribuição do excedente, estruturadas pelas relações de <strong>propriedade</strong> e mediadas pelo <strong>Estado</strong>. Polanyi, os agregados macroeconômicos e o PIB agora fazem sentido num quadro coerente! 🎉
+    <div style="max-width:560px;width:100%">
+      <div class="final-icon">◆</div>
+      <div class="final-titulo">Percurso Concluído</div>
+      <div class="final-xp" id="final-xp">450 XP</div>
+      <div class="final-box">
+        Você percorreu o caminho completo: a Economia não é a ciência das escolhas individuais diante da escassez — é o estudo da <strong>reprodução material da sociedade</strong>. Produção, acumulação e distribuição do excedente, estruturadas pelas relações de <strong>propriedade</strong> e mediadas pelo <strong>Estado</strong>. Polanyi, os agregados macroeconômicos e o PIB agora integram um quadro analítico coerente.
       </div>
-      <button class="btn-iniciar" onclick="enviar()" id="btn-enviar">📊 ENVIAR RESULTADOS AO PROFESSOR</button>
+      <button class="btn-iniciar" onclick="enviar()" id="btn-enviar">Enviar Resultados ao Professor</button>
+      <div class="envio-status" id="envio-status"></div>
     </div>
   </div>
 </div>
@@ -430,14 +530,17 @@
 <!-- Modal -->
 <div id="modal-res">
   <div class="res-card">
-    <span class="res-emoji" id="m-emoji">⭐</span>
-    <div class="res-titulo" id="m-titulo">MISSÃO COMPLETA!</div>
-    <div class="res-acerto" id="m-acerto">8/10</div>
+    <span class="res-icon" id="m-emoji">◆</span>
+    <div class="res-titulo" id="m-titulo">Módulo Concluído</div>
+    <div class="res-acerto" id="m-acerto">3/4 corretos</div>
     <div class="res-xp" id="m-xp">+80 XP</div>
-    <p class="res-msg" id="m-msg">Excelente!</p>
-    <button class="btn-iniciar" onclick="fecharModal()" style="font-size:1.3rem;padding:0.8rem">🗺️ VOLTAR AO MAPA</button>
+    <p class="res-msg" id="m-msg">Bom desempenho.</p>
+    <button class="btn-iniciar" onclick="fecharModal()" style="font-size:0.8rem;padding:0.7rem 2rem">Voltar aos Módulos</button>
   </div>
 </div>
+
+<!-- iframe oculto para envio via form -->
+<iframe name="envio-frame" style="display:none"></iframe>
 
 <script>
 // ================================================================
@@ -447,25 +550,22 @@ const S = { nome:'', email:'', mat:'', xp:0, xpMax:450, concluidas:[], respostas
 const WEBHOOK = 'https://script.google.com/macros/s/AKfycbyojT9HMxZLi4GBeSBJI1oev4J4l7v2XI5PWiMpzimo8sobw4Suos2YbN0Eagiw_iks/exec';
 
 // ================================================================
-// CONTEÚDO DAS MISSÕES
+// CONTEÚDO DAS MISSÕES (dados preservados, labels atualizados)
 // ================================================================
 const MISSOES = [
-  // ============================================================
-  // M1 — Economia como Reprodução Material
-  // ============================================================
   {
     id:'M1', xp:85, prerequisito:null,
-    icone:'⚙️', cor:'#7d3c98', nome:'A Reprodução Material',
-    desc:'O que a Economia estuda de verdade? Não escolhas, mas a produção, acumulação e distribuição do excedente social.',
+    icone:'⚙', cor:'var(--purple)', nome:'A Reprodução Material',
+    desc:'O que a Economia estuda de verdade? Não escolhas individuais, mas a produção, acumulação e distribuição do excedente social.',
     cenas:[
-      { tipo:'historia', char:'👨‍🏫', nome:'PROFESSOR',
+      { tipo:'historia', char:'👨‍🏫', nome:'APRESENTAÇÃO',
         fala:'Antes de tudo: precisamos quebrar um mito. Você vai ouvir por aí que "Economia é a ciência das escolhas individuais diante da escassez". Isso é uma visão. Mas há outra — mais profunda — que nos diz que Economia é o estudo da <strong>reprodução material da sociedade</strong>.' },
-      { tipo:'anim', els:['🏭','🌾','⚙️','🔄'], ttl:'PRODUÇÃO → ACUMULAÇÃO → DISTRIBUIÇÃO' },
-      { tipo:'conceito', label:'📖 OBJETO DA ECONOMIA', c:'#7d3c98', cb:'#f5eef8',
-        ttl:'A REPRODUÇÃO MATERIAL DA SOCIEDADE',
+      { tipo:'anim', els:['🏭','🌾','⚙️','🔄'], ttl:'Produção → Acumulação → Distribuição' },
+      { tipo:'conceito', label:'Objeto da Economia', clr:'var(--accent)', bg:'var(--accent-bg)', bdr:'var(--accent-border)',
+        ttl:'A Reprodução Material da Sociedade',
         txt:'Toda sociedade precisa se reproduzir materialmente: produzir bens e serviços para sobreviver e se desenvolver. O objeto central da Economia é entender <strong>o que é produzido</strong>, <strong>como é acumulado</strong> e <strong>como o excedente é distribuído</strong> entre os grupos sociais. Quem fica com o quê — e por quê — é a pergunta central.' },
-      { tipo:'conceito', label:'🔑 EXCEDENTE ECONÔMICO', c:'#c0392b', cb:'#fdf2f2',
-        ttl:'O QUE É O EXCEDENTE?',
+      { tipo:'conceito', label:'Excedente Econômico', clr:'var(--red)', bg:'var(--red-bg)', bdr:'var(--red-border)',
+        ttl:'O Que É o Excedente?',
         txt:'Excedente = produção total MENOS o necessário para repor o que foi consumido na produção. É a parte da riqueza que "sobra" após garantir a subsistência e a reposição dos meios de produção. A questão política fundamental é: <strong>quem se apropria desse excedente?</strong> Trabalhadores, proprietários de terra, detentores de capital ou o Estado?' }
     ],
     desafios:[
@@ -476,14 +576,13 @@ const MISSOES = [
              'A análise do comportamento dos mercados e dos mecanismos de formação de preços de equilíbrio',
              'A disciplina que calcula o PIB e outros indicadores macroeconômicos para orientar políticas públicas'],
         correta:1,
-        ok:'💡 Exato! A visão que trabalhamos parte da reprodução material: como a sociedade se organiza para produzir, o que acumula e como distribui o excedente. Isso é radicalmente diferente de reduzir a Economia a "escolhas individuais".',
-        err:'❌ A visão que trabalhamos em aula não parte do indivíduo que escolhe, mas da sociedade que se reproduz materialmente. O foco é na produção coletiva, acumulação e distribuição do excedente — não na maximização individual de utilidade.' },
-      { id:'M1D2', tipo:'vf',
-        ttl:'Excedente e Distribuição',
+        ok:'A visão que trabalhamos parte da reprodução material: como a sociedade se organiza para produzir, o que acumula e como distribui o excedente. Isso é radicalmente diferente de reduzir a Economia a "escolhas individuais".',
+        err:'A visão que trabalhamos em aula não parte do indivíduo que escolhe, mas da sociedade que se reproduz materialmente. O foco é na produção coletiva, acumulação e distribuição do excedente — não na maximização individual de utilidade.' },
+      { id:'M1D2', tipo:'vf', ttl:'Excedente e Distribuição',
         p:'"A pergunta central da Economia é descobrir quais são as preferências individuais dos consumidores, pois são elas que determinam o que a sociedade produz." Esta afirmação está ALINHADA com o que estudamos em aula?',
         correta:false,
-        ok:'✅ Correto! Essa afirmação NÃO está alinhada com nossa perspectiva. A pergunta central que trabalhamos não é sobre preferências individuais de consumidores, mas sobre quem se apropria do excedente econômico e como isso estrutura as relações sociais.',
-        err:'❌ Não! Nossa perspectiva inverte essa lógica. Não são as preferências dos consumidores que determinam a produção — são as relações de propriedade e poder que determinam quem controla o processo produtivo e quem fica com o excedente.' },
+        ok:'Correto. Essa afirmação NÃO está alinhada com nossa perspectiva. A pergunta central que trabalhamos não é sobre preferências individuais de consumidores, mas sobre quem se apropria do excedente econômico e como isso estrutura as relações sociais.',
+        err:'Nossa perspectiva inverte essa lógica. Não são as preferências dos consumidores que determinam a produção — são as relações de propriedade e poder que determinam quem controla o processo produtivo e quem fica com o excedente.' },
       { id:'M1D3', tipo:'mc', ttl:'As Duas Tradições',
         p:'Existe uma tensão histórica entre duas visões sobre o que a Economia estuda. Uma a vê como "ciência das escolhas" (tradição neoclássica/robbinsiana). A outra a vê como estudo da reprodução material e do excedente. Qual das alternativas identifica CORRETAMENTE uma diferença central entre essas duas perspectivas?',
         ops:['Uma usa matemática e a outra não — é apenas uma diferença de método, sem implicações teóricas',
@@ -491,39 +590,35 @@ const MISSOES = [
              'Uma é marxista e a outra é capitalista — são equivalentes mas usadas por grupos políticos diferentes',
              'Uma analisa o curto prazo e a outra o longo prazo da economia'],
         correta:1,
-        ok:'🌟 Perfeito! A diferença não é apenas matemática ou política — é ontológica. O que a Economia "vê" como seu objeto muda completamente: indivíduos que maximizam (neoclássico) vs. classes sociais em relação de propriedade que disputam o excedente (reprodução material).',
-        err:'❌ A diferença é mais profunda do que parece. Não é apenas de método ou de prazo — é sobre o que você enxerga como sujeito econômico. Uma vê indivíduos atomizados; a outra vê grupos sociais estruturados por relações de propriedade disputando o excedente.' },
+        ok:'A diferença não é apenas matemática ou política — é ontológica. O que a Economia "vê" como seu objeto muda completamente: indivíduos que maximizam (neoclássico) vs. classes sociais em relação de propriedade que disputam o excedente (reprodução material).',
+        err:'A diferença é mais profunda do que parece. Não é apenas de método ou de prazo — é sobre o que você enxerga como sujeito econômico. Uma vê indivíduos atomizados; a outra vê grupos sociais estruturados por relações de propriedade disputando o excedente.' },
       { id:'M1D4', tipo:'ens', ttl:'Reflexão',
         p:'Em suas palavras: por que dizer que a Economia estuda "escolhas diante da escassez" pode obscurecer aspectos importantes da vida econômica real? Pense nas relações de propriedade, no excedente e no poder. (Mínimo 40 palavras)',
         min:40, ph:'Pense: quem decide o que será produzido? Quem determina quais necessidades serão atendidas? As relações de propriedade importam para isso?' }
     ]
   },
-
-  // ============================================================
-  // M2 — Propriedade, Fatores de Produção e o Estado
-  // ============================================================
   {
     id:'M2', xp:90, prerequisito:'M1',
-    icone:'🏛️', cor:'#c0392b', nome:'Propriedade, Fatores e Estado',
+    icone:'🏛', cor:'var(--red)', nome:'Propriedade, Fatores e Estado',
     desc:'Quem detém Capital, Terra e Trabalho? Como a posição dos agentes nos fatores de produção determina quem fica com o excedente?',
     cenas:[
       { tipo:'historia', char:'⚖️', nome:'A QUESTÃO CENTRAL',
         fala:'A posição que cada grupo ocupa em relação aos fatores de produção determina sua renda. Quem possui Capital recebe Lucro/Juro. Quem possui Terra recebe Aluguel. Quem só possui sua força de Trabalho recebe Salário. <strong>O Estado está no centro garantindo esse sistema de propriedade.</strong>' },
-      { tipo:'anim', els:['🏭','🌍','👷','🏛️'], ttl:'FATORES · PROPRIEDADE · ESTADO' },
-      { tipo:'conceito', label:'📖 OS FATORES DE PRODUÇÃO', c:'#c0392b', cb:'#fdf2f2',
-        ttl:'CAPITAL · TERRA · TRABALHO',
+      { tipo:'anim', els:['🏭','🌍','👷','🏛️'], ttl:'Fatores · Propriedade · Estado' },
+      { tipo:'conceito', label:'Os Fatores de Produção', clr:'var(--red)', bg:'var(--red-bg)', bdr:'var(--red-border)',
+        ttl:'Capital · Terra · Trabalho',
         txt:'Os <strong>fatores de produção</strong> são os elementos necessários para produzir: <strong>Capital</strong> (máquinas, equipamentos, dinheiro para investir), <strong>Terra</strong> (recursos naturais, espaço físico) e <strong>Trabalho</strong> (força de trabalho humana). A propriedade PRIVADA de cada fator define quem recebe qual parte do excedente: Lucro (Capital), Aluguel (Terra), Salário (Trabalho).' },
-      { tipo:'conceito', label:'🏛️ O ESTADO', c:'#1e3a5f', cb:'#eaf2fb',
-        ttl:'O ESTADO COMO GARANTIDOR',
+      { tipo:'conceito', label:'O Estado', clr:'var(--accent)', bg:'var(--accent-bg)', bdr:'var(--accent-border)',
+        ttl:'O Estado como Garantidor',
         txt:'O Estado não é um árbitro neutro acima dos conflitos — é a instituição que <strong>garante e regula o sistema de propriedade privada</strong>. Ao proteger contratos, direitos de propriedade e a ordem econômica, o Estado garante que a reprodução material da sociedade ocorra dentro de determinadas relações de poder. Isso é o que Polanyi chama de "separação institucional" entre esfera política e esfera econômica — que ele argumenta ser uma construção histórica, não natural.' }
     ],
     desafios:[
       { id:'M2D1', tipo:'drag', ttl:'Fator → Renda',
-        p:'Arraste cada fator de produção para a coluna da renda que ele gera para seu proprietário.',
+        p:'Classifique cada fator de produção na coluna da renda que ele gera para seu proprietário.',
         zonas:[
-          { id:'za', lbl:'💰 LUCRO / JURO', classe:'dz-a' },
-          { id:'zb', lbl:'🌍 ALUGUEL',      classe:'dz-b' },
-          { id:'zc', lbl:'👷 SALÁRIO',       classe:'dz-c' }
+          { id:'za', lbl:'Lucro / Juro', classe:'dz-a' },
+          { id:'zb', lbl:'Aluguel',      classe:'dz-b' },
+          { id:'zc', lbl:'Salário',      classe:'dz-c' }
         ],
         itens:[
           { id:'i1', txt:'Capital (máquinas, dinheiro)', zona:'za' },
@@ -541,8 +636,8 @@ const MISSOES = [
              'Porque o governo distribui o excedente igualmente entre todos os fatores, independentemente da propriedade',
              'Porque o mercado, por meio da concorrência, garante automaticamente que o excedente seja distribuído de forma justa entre os fatores'],
         correta:1,
-        ok:'💡 Exatamente! A propriedade dos meios de produção não é apenas jurídica — é uma relação de poder. Quem controla Capital, Terra e os meios técnicos de produção dita as condições sob as quais o trabalho é empregado e, portanto, como o excedente é repartido.',
-        err:'❌ A propriedade dos fatores determina poder, não apenas preferências. Quem detém o Capital define as condições de emprego do Trabalho e apropria a maior parte do excedente gerado. Isso não é neutro nem automático — é uma relação social estruturada.' },
+        ok:'A propriedade dos meios de produção não é apenas jurídica — é uma relação de poder. Quem controla Capital, Terra e os meios técnicos de produção dita as condições sob as quais o trabalho é empregado e, portanto, como o excedente é repartido.',
+        err:'A propriedade dos fatores determina poder, não apenas preferências. Quem detém o Capital define as condições de emprego do Trabalho e apropria a maior parte do excedente gerado. Isso não é neutro nem automático — é uma relação social estruturada.' },
       { id:'M2D3', tipo:'mc', ttl:'Polanyi e o Estado',
         p:'Segundo Polanyi, a ideia de que a "esfera econômica" deve ser separada e autônoma da "esfera política/social" é:',
         ops:['Uma verdade universal descoberta pelos economistas clássicos que deve ser preservada para garantir a eficiência dos mercados',
@@ -550,32 +645,28 @@ const MISSOES = [
              'Uma descrição precisa de como as economias primitivas sempre funcionaram, antes da interferência dos Estados modernos',
              'Uma proposta socialista para eliminar o mercado e substituí-lo por planejamento central'],
         correta:1,
-        ok:'🌟 Correto! Polanyi é demolidor aqui: a separação entre economia e sociedade é uma INVENÇÃO. Historicamente, a economia sempre foi "embedded" (encaixada) nas relações sociais. A autonomia da esfera econômica não é natural — foi criada politicamente.',
-        err:'❌ Polanyi mostra que a separação entre esfera econômica e esfera política é uma CONSTRUÇÃO HISTÓRICA. Antes do século XIX, a economia estava absorvida pela sociedade. A ideia de que o mercado deve ser autônomo e auto-regulável foi inventada — e exigiu ação ativa do Estado para existir.' },
+        ok:'Polanyi é demolidor aqui: a separação entre economia e sociedade é uma INVENÇÃO. Historicamente, a economia sempre foi "embedded" (encaixada) nas relações sociais. A autonomia da esfera econômica não é natural — foi criada politicamente.',
+        err:'Polanyi mostra que a separação entre esfera econômica e esfera política é uma CONSTRUÇÃO HISTÓRICA. Antes do século XIX, a economia estava absorvida pela sociedade. A ideia de que o mercado deve ser autônomo e auto-regulável foi inventada — e exigiu ação ativa do Estado para existir.' },
       { id:'M2D4', tipo:'vf', ttl:'Estado e Propriedade',
         p:'"O Estado brasileiro garante, através da legislação e do aparato judicial, os direitos de propriedade privada sobre os meios de produção. Isso significa que o Estado tem um papel ativo na estruturação das relações econômicas, não sendo um árbitro neutro." Esta afirmação está CORRETA?',
         correta:true,
-        ok:'✅ Correto! O Estado não é passivo nem neutro. Ao garantir contratos, direitos de propriedade, o sistema financeiro e a ordem econômica, ele define ativamente quais relações de produção são legítimas. Isso é estrutural, não eventual.',
-        err:'❌ O Estado tem papel muito ativo. Sem o aparato jurídico, policial e institucional do Estado garantindo a propriedade privada e os contratos, as relações capitalistas de produção não poderiam funcionar. Ele não é neutro — é constitutivo da ordem econômica.' }
+        ok:'O Estado não é passivo nem neutro. Ao garantir contratos, direitos de propriedade, o sistema financeiro e a ordem econômica, ele define ativamente quais relações de produção são legítimas. Isso é estrutural, não eventual.',
+        err:'O Estado tem papel muito ativo. Sem o aparato jurídico, policial e institucional do Estado garantindo a propriedade privada e os contratos, as relações capitalistas de produção não poderiam funcionar. Ele não é neutro — é constitutivo da ordem econômica.' }
     ]
   },
-
-  // ============================================================
-  // M3 — Polanyi: A Grande Transformação
-  // ============================================================
   {
     id:'M3', xp:90, prerequisito:'M2',
-    icone:'🎭', cor:'#117a65', nome:'A Grande Transformação',
+    icone:'🎭', cor:'var(--teal)', nome:'A Grande Transformação',
     desc:'Polanyi e as mercadorias fictícias: trabalho, terra e dinheiro não são mercadorias — mas são tratados como se fossem.',
     cenas:[
       { tipo:'historia', char:'📚', nome:'KARL POLANYI (1944)',
         fala:'A economia de mercado exige que tudo seja comprável e vendável. Mas Trabalho, Terra e Dinheiro não foram produzidos para venda — são <strong>mercadorias fictícias</strong>. Tratar a vida humana, a natureza e o poder de compra como mercadorias é a grande ficção que sustenta e ao mesmo tempo destrói o mercado auto-regulável.' },
-      { tipo:'anim', els:['👷','🌍','💰','⚙️'], ttl:'A FICÇÃO QUE ALIMENTA A MÁQUINA' },
-      { tipo:'conceito', label:'🎭 MERCADORIAS FICTÍCIAS', c:'#117a65', cb:'#e8f8f5',
-        ttl:'TRABALHO · TERRA · DINHEIRO',
+      { tipo:'anim', els:['👷','🌍','💰','⚙️'], ttl:'A Ficção que Alimenta a Máquina' },
+      { tipo:'conceito', label:'Mercadorias Fictícias', clr:'var(--teal)', bg:'var(--teal-bg)', bdr:'rgba(77,182,160,0.25)',
+        ttl:'Trabalho · Terra · Dinheiro',
         txt:'Mercadoria = objeto produzido para venda. Mas: <strong>Trabalho</strong> é atividade humana inseparável do próprio ser vivo. <strong>Terra</strong> é a Natureza — não foi fabricada por ninguém. <strong>Dinheiro</strong> é um mecanismo social de poder de compra, não um produto. Ao tratá-los como mercadorias, o mercado dispõe da substância humana e natural da sociedade — o que Polanyi chama de <strong>"Moinho Satânico"</strong>.' },
-      { tipo:'conceito', label:'⚡ DUPLO MOVIMENTO', c:'#c0392b', cb:'#fdf2f2',
-        ttl:'EXPANSÃO DO MERCADO vs. AUTO-PROTEÇÃO SOCIAL',
+      { tipo:'conceito', label:'Duplo Movimento', clr:'var(--red)', bg:'var(--red-bg)', bdr:'var(--red-border)',
+        ttl:'Expansão do Mercado vs. Auto-Proteção Social',
         txt:'A história do século XIX é marcada por um <strong>duplo movimento</strong>: de um lado, a expansão do mercado tentando comodificar Terra, Trabalho e Dinheiro; de outro, a <strong>auto-proteção da sociedade</strong> criando leis fabris, sindicatos, tarifas e regulações para não ser destruída. Esse clash é o motor da história social moderna.' }
     ],
     desafios:[
@@ -586,13 +677,13 @@ const MISSOES = [
              'Porque seu valor de mercado é artificial e determinado pelo governo, não pela oferta e demanda',
              'Porque são bens públicos que não podem ser privatizados sem causar danos sociais'],
         correta:1,
-        ok:'💡 Exato! Polanyi usa uma definição precisa: mercadoria = produzido para venda. Nenhum dos três se encaixa. Mas o mercado os trata COMO SE fossem mercadorias — daí "fictícia". É a ficção que permite o mercado funcionar, mas que ao fazê-lo destrói sua própria base.',
-        err:'❌ Polanyi é muito preciso: mercadoria = objeto produzido ESPECIFICAMENTE para venda. Trabalho, Terra e Dinheiro não atendem a esse critério — mas são tratados como se atendessem. Daí "fictícias". A ficção é necessária para o mercado funcionar, mas seus efeitos são reais e destrutivos.' },
+        ok:'Polanyi usa uma definição precisa: mercadoria = produzido para venda. Nenhum dos três se encaixa. Mas o mercado os trata COMO SE fossem mercadorias — daí "fictícia". É a ficção que permite o mercado funcionar, mas que ao fazê-lo destrói sua própria base.',
+        err:'Polanyi é muito preciso: mercadoria = objeto produzido ESPECIFICAMENTE para venda. Trabalho, Terra e Dinheiro não atendem a esse critério — mas são tratados como se atendessem. Daí "fictícias". A ficção é necessária para o mercado funcionar, mas seus efeitos são reais e destrutivos.' },
       { id:'M3D2', tipo:'vf', ttl:'Conexão com os Fatores de Produção',
         p:'"As mercadorias fictícias de Polanyi (Trabalho, Terra e Dinheiro) correspondem exatamente aos três fatores de produção clássicos (Trabalho, Terra e Capital). A diferença é que Polanyi mostra que tratá-los como mercadorias não é natural — é uma construção histórica que tem consequências sociais profundas." Essa afirmação está CORRETA?',
         correta:true,
-        ok:'✅ Perfeito! Você conectou os dois marcos teóricos. Os fatores de produção geram renda (salário, aluguel, lucro) — isso é o lado econômico convencional. Polanyi adiciona a dimensão histórica e crítica: esse processo de mercantilização dos fatores é construído, violento e potencialmente autodestrutivo.',
-        err:'❌ Há uma conexão direta! As mercadorias fictícias de Polanyi (Trabalho, Terra, Dinheiro/Capital) são os mesmos fatores de produção da teoria econômica. O que Polanyi acrescenta é a crítica: mercantilizá-los não é natural nem inevitável — foi construído historicamente e tem custos sociais enormes.' },
+        ok:'Você conectou os dois marcos teóricos. Os fatores de produção geram renda (salário, aluguel, lucro) — isso é o lado econômico convencional. Polanyi adiciona a dimensão histórica e crítica: esse processo de mercantilização dos fatores é construído, violento e potencialmente autodestrutivo.',
+        err:'Há uma conexão direta. As mercadorias fictícias de Polanyi (Trabalho, Terra, Dinheiro/Capital) são os mesmos fatores de produção da teoria econômica. O que Polanyi acrescenta é a crítica: mercantilizá-los não é natural nem inevitável — foi construído historicamente e tem custos sociais enormes.' },
       { id:'M3D3', tipo:'mc', ttl:'Speenhamland e a Resistência',
         p:'A Lei de Speenhamland (1795) é usada por Polanyi como exemplo de quê?',
         ops:['Uma política de bem-estar social bem-sucedida que prova que o mercado livre funciona melhor com transferências de renda',
@@ -600,30 +691,26 @@ const MISSOES = [
              'A primeira política keynesiana de estímulo à demanda agregada através de transferências diretas às famílias pobres',
              'Um exemplo de fracasso da intervenção estatal que teria causado desemprego e desincentivado o trabalho'],
         correta:1,
-        ok:'🌟 Exato! Speenhamland é o exemplo do duplo movimento em ação. Sem entender a teoria, a sociedade inglesa criou um mecanismo de proteção que impediu a formação plena de um mercado de trabalho livre — porque a sociedade, intuitivamente, resistia a se deixar destruir.',
-        err:'❌ Speenhamland é o exemplo do duplo movimento: a auto-proteção da sociedade contra a mercantilização do trabalho. Não foi uma política keynesiana nem prova do livre mercado — foi a resistência histórica de uma sociedade que não queria transformar seus membros em mercadoria.' },
+        ok:'Speenhamland é o exemplo do duplo movimento em ação. Sem entender a teoria, a sociedade inglesa criou um mecanismo de proteção que impediu a formação plena de um mercado de trabalho livre — porque a sociedade, intuitivamente, resistia a se deixar destruir.',
+        err:'Speenhamland é o exemplo do duplo movimento: a auto-proteção da sociedade contra a mercantilização do trabalho. Não foi uma política keynesiana nem prova do livre mercado — foi a resistência histórica de uma sociedade que não queria transformar seus membros em mercadoria.' },
       { id:'M3D4', tipo:'ens', ttl:'Polanyi Hoje',
         p:'Identifique UMA situação contemporânea (pode ser no Brasil ou global) que ilustre o "duplo movimento" de Polanyi: de um lado, pressão para mercantilizar algo que não deveria ser mercadoria; de outro, resistência social a essa mercantilização. Explique brevemente. (Mínimo 45 palavras)',
         min:45, ph:'Exemplos possíveis: privatização da água, mercantilização da saúde/educação, uberização do trabalho, mercado de carbono, terras indígenas... Mas use seu próprio exemplo e argumento.' }
     ]
   },
-
-  // ============================================================
-  // M4 — Macroeconomia: Instrumentos e Conflitos
-  // ============================================================
   {
     id:'M4', xp:85, prerequisito:'M3',
-    icone:'🏦', cor:'#1a5276', nome:'Macroeconomia e Políticas',
+    icone:'🏦', cor:'var(--accent)', nome:'Macroeconomia e Políticas',
     desc:'Como o Estado atua sobre a economia agregada? Política fiscal, monetária, cambial — e seus trade-offs reais.',
     cenas:[
       { tipo:'historia', char:'🏦', nome:'O ESTADO EM AÇÃO',
         fala:'Se o Estado garante a ordem da propriedade, a Macroeconomia é o instrumental técnico pelo qual ele intervém na reprodução material em escala nacional. Inflação, desemprego, crescimento: são manifestações dos conflitos distributivos sobre o excedente, que o Estado tenta administrar.' },
-      { tipo:'anim', els:['📊','💵','⚖️','🏗️'], ttl:'INSTRUMENTOS DE POLÍTICA ECONÔMICA' },
-      { tipo:'conceito', label:'📖 MACROECONOMIA', c:'#1a5276', cb:'#eaf2fb',
-        ttl:'OS GRANDES AGREGADOS',
+      { tipo:'anim', els:['📊','💵','⚖️','🏗️'], ttl:'Instrumentos de Política Econômica' },
+      { tipo:'conceito', label:'Macroeconomia', clr:'var(--accent)', bg:'var(--accent-bg)', bdr:'var(--accent-border)',
+        ttl:'Os Grandes Agregados',
         txt:'A Macroeconomia estuda a economia como um todo: PIB, nível de emprego, inflação, taxa de juros, balanço de pagamentos. Não analisa mercados individuais (isso é Microeconomia) — analisa os <strong>agregados nacionais</strong>. Os instrumentos disponíveis ao Estado são: <strong>Política Fiscal</strong> (tributação e gastos), <strong>Política Monetária</strong> (controle da moeda e juros) e <strong>Política Cambial</strong> (taxa de câmbio).' },
-      { tipo:'conceito', label:'⚡ TRADE-OFFS', c:'#922b21', cb:'#fdedec',
-        ttl:'OBJETIVOS EM CONFLITO',
+      { tipo:'conceito', label:'Trade-offs', clr:'var(--red)', bg:'var(--red-bg)', bdr:'var(--red-border)',
+        ttl:'Objetivos em Conflito',
         txt:'Os quatro objetivos macroeconômicos (alto emprego, estabilidade de preços, distribuição justa, crescimento) <strong>entram em conflito</strong>. O mais famoso: <em>trade-off inflação × desemprego</em>. Para reduzir a inflação, o governo contrai a demanda → desemprego sobe. Para reduzir o desemprego, expande → pressão inflacionária. Esse conflito não é técnico — é <strong>distributivo</strong>: quem paga o custo da estabilização? Os trabalhadores (desemprego) ou os credores (inflação)?' }
     ],
     desafios:[
@@ -634,8 +721,8 @@ const MISSOES = [
              'Reduzir os impostos para estimular o consumo e o crescimento, o que aumentará a produção e baixará os preços',
              'Emitir mais moeda para que o governo pague suas dívidas sem precisar tributar mais'],
         correta:1,
-        ok:'🎯 Correto! Para combater inflação, a política fiscal contrai demanda: menos gastos públicos e/ou mais impostos. Isso reduz o poder de compra na economia. O custo distributivo é real: quem perde mais com corte de gastos? Geralmente os mais pobres e os trabalhadores do setor público.',
-        err:'❌ Política fiscal anti-inflacionária é contracionista: corta gastos ou aumenta impostos para reduzir a demanda agregada. Aumentar gastos ou reduzir impostos faz o oposto — expande a demanda e tende a aumentar a pressão inflacionária.' },
+        ok:'Para combater inflação, a política fiscal contrai demanda: menos gastos públicos e/ou mais impostos. Isso reduz o poder de compra na economia. O custo distributivo é real: quem perde mais com corte de gastos? Geralmente os mais pobres e os trabalhadores do setor público.',
+        err:'Política fiscal anti-inflacionária é contracionista: corta gastos ou aumenta impostos para reduzir a demanda agregada. Aumentar gastos ou reduzir impostos faz o oposto — expande a demanda e tende a aumentar a pressão inflacionária.' },
       { id:'M4D2', tipo:'mc', ttl:'Política Monetária',
         p:'O Banco Central decide aumentar a taxa de juros. Quais são os efeitos esperados sobre a economia?',
         ops:['Aumento do consumo e investimento, pois as empresas têm mais incentivo para tomar crédito e expandir',
@@ -643,13 +730,13 @@ const MISSOES = [
              'Desvalorização imediata da moeda nacional, pois capital estrangeiro foge para países com juros mais baixos',
              'Nenhum efeito real sobre a economia, pois bancos comerciais compensam aumentando a oferta de crédito'],
         correta:1,
-        ok:'💡 Exatamente! Juros altos contraem crédito, reduzem inflação — mas encarecem o investimento produtivo e beneficiam quem tem capital financeiro aplicado. Há um claro conflito distributivo: credores ganham, devedores (empresas, trabalhadores) perdem. No Brasil, essa dinâmica é especialmente aguda.',
-        err:'❌ Juros mais altos contraem o crédito: consumo cai, investimento produtivo fica mais caro. Pode conter a inflação, mas ao custo de menor crescimento e emprego. Além disso, beneficia os detentores de capital financeiro — é uma decisão com fortes implicações distributivas.' },
+        ok:'Juros altos contraem crédito, reduzem inflação — mas encarecem o investimento produtivo e beneficiam quem tem capital financeiro aplicado. Há um claro conflito distributivo: credores ganham, devedores (empresas, trabalhadores) perdem. No Brasil, essa dinâmica é especialmente aguda.',
+        err:'Juros mais altos contraem o crédito: consumo cai, investimento produtivo fica mais caro. Pode conter a inflação, mas ao custo de menor crescimento e emprego. Além disso, beneficia os detentores de capital financeiro — é uma decisão com fortes implicações distributivas.' },
       { id:'M4D3', tipo:'vf', ttl:'O Plano Real',
         p:'"O Plano Real (1994) conseguiu reduzir a inflação brasileira usando, entre outros instrumentos, a valorização do Real frente ao dólar. Um efeito colateral foi que os produtos brasileiros ficaram relativamente mais caros no exterior (exportações caíram) e os importados mais baratos (importações subiram), gerando déficit comercial e vulnerabilidade externa." Esta descrição está CORRETA?',
         correta:true,
-        ok:'✅ Correto! O Real estabilizou os preços usando o câmbio valorizado como âncora. Funcionou contra a inflação, mas o custo foi a fragilização do setor exportador e o aumento da dependência externa. É o trade-off clássico das políticas de estabilização: combater a inflação pode comprometer a competitividade externa.',
-        err:'❌ Esta é uma descrição correta do Plano Real. Câmbio valorizado → importados baratos (concorrência com produtos nacionais) → desinflação. Mas também → exportações mais caras → déficit comercial → vulnerabilidade externa. É o trade-off central que levou à crise cambial de 1999.' },
+        ok:'O Real estabilizou os preços usando o câmbio valorizado como âncora. Funcionou contra a inflação, mas o custo foi a fragilização do setor exportador e o aumento da dependência externa. É o trade-off clássico das políticas de estabilização.',
+        err:'Esta é uma descrição correta do Plano Real. Câmbio valorizado → importados baratos → desinflação. Mas também → exportações mais caras → déficit comercial → vulnerabilidade externa. É o trade-off central que levou à crise cambial de 1999.' },
       { id:'M4D4', tipo:'mc', ttl:'A Dimensão Distributiva',
         p:'Por que dizer que o "trade-off entre inflação e desemprego" é um conflito DISTRIBUTIVO e não apenas técnico?',
         ops:['Porque os economistas discordam sobre os dados — é um conflito de interpretação estatística, não político',
@@ -657,27 +744,23 @@ const MISSOES = [
              'Porque tanto inflação quanto desemprego afetam todos igualmente, sendo uma questão de eficiência agregada e não de distribuição',
              'Porque o Banco Central tem autonomia técnica para resolver ambos os problemas simultaneamente, sem nenhum custo distributivo'],
         correta:1,
-        ok:'🌟 Perfeito! Você capturou a dimensão política da macroeconomia. Não é uma questão técnica neutra — é uma escolha sobre quem paga o custo: trabalhadores (desemprego) ou detentores de ativos financeiros (inflação). Essa é a luta de classes inscrita nas políticas do Banco Central.',
-        err:'❌ É distributivo porque os custos recaem sobre grupos diferentes. Inflação prejudica credores e quem tem renda fixa; desemprego prejudica trabalhadores. A "solução técnica" esconde uma escolha política sobre quem paga a conta da instabilidade macroeconômica.' }
+        ok:'Você capturou a dimensão política da macroeconomia. Não é uma questão técnica neutra — é uma escolha sobre quem paga o custo: trabalhadores (desemprego) ou detentores de ativos financeiros (inflação).',
+        err:'É distributivo porque os custos recaem sobre grupos diferentes. Inflação prejudica credores e quem tem renda fixa; desemprego prejudica trabalhadores. A "solução técnica" esconde uma escolha política sobre quem paga a conta da instabilidade macroeconômica.' }
     ]
   },
-
-  // ============================================================
-  // M5 — PIB, Contabilidade Social e o Excedente
-  // ============================================================
   {
     id:'M5', xp:100, prerequisito:'M4',
-    icone:'📊', cor:'#b7950b', nome:'PIB e Riqueza Nacional',
+    icone:'📊', cor:'var(--gold)', nome:'PIB e Riqueza Nacional',
     desc:'Como medimos a reprodução material? O PIB, as três óticas e o que esses números revelam — e ocultam.',
     cenas:[
       { tipo:'historia', char:'📊', nome:'CONTABILIDADE SOCIAL',
         fala:'O PIB é o termômetro da reprodução material de uma nação. Mas mede a produção, não o bem-estar. Mede o excedente total gerado — não como ele é distribuído. Entender o PIB é essencial; entender seus limites, ainda mais.' },
-      { tipo:'anim', els:['🏭','🏠','🏛️','🌐'], ttl:'PIB: A RIQUEZA NACIONAL EM NÚMEROS' },
-      { tipo:'conceito', label:'📖 PIB', c:'#b7950b', cb:'#fef9e7',
-        ttl:'PRODUTO INTERNO BRUTO',
+      { tipo:'anim', els:['🏭','🏠','🏛️','🌐'], ttl:'PIB: a Riqueza Nacional em Números' },
+      { tipo:'conceito', label:'PIB', clr:'var(--gold)', bg:'var(--gold-bg)', bdr:'var(--gold-border)',
+        ttl:'Produto Interno Bruto',
         txt:'O PIB é o valor de todos os <strong>bens e serviços finais</strong> produzidos <strong>dentro do território nacional</strong> num dado período, a preços de mercado. Pode ser medido por três óticas equivalentes: <strong>Produto</strong> (valor dos bens finais), <strong>Despesa</strong> (C + I + G + X − M) e <strong>Renda</strong> (Salários + Juros + Aluguéis + Lucros). As três chegam ao mesmo número — mas revelam perspectivas diferentes sobre a reprodução material.' },
-      { tipo:'conceito', label:'⚡ PIB E DISTRIBUIÇÃO', c:'#922b21', cb:'#fdedec',
-        ttl:'O QUE O PIB NÃO MOSTRA',
+      { tipo:'conceito', label:'PIB e Distribuição', clr:'var(--red)', bg:'var(--red-bg)', bdr:'var(--red-border)',
+        ttl:'O Que o PIB Não Mostra',
         txt:'O PIB cresce → a reprodução material se expande. Mas <strong>não diz nada sobre a distribuição do excedente</strong>. O Brasil pode ter o PIB crescendo enquanto a desigualdade aprofunda. Por isso, a Renda Nacional decomposta em Salários, Juros, Aluguéis e Lucros é mais reveladora: mostra <strong>quem fica com o excedente</strong> segundo sua posição nos fatores de produção. Isso conecta a Contabilidade Social de volta às relações de propriedade.' }
     ],
     desafios:[
@@ -688,8 +771,8 @@ const MISSOES = [
              'Que o cálculo do PIB brasileiro está superestimado por problemas estatísticos do IBGE',
              'Que os brasileiros trabalham mais no exterior do que estrangeiros trabalham no Brasil'],
         correta:1,
-        ok:'🎯 Exato! PIB > PNB significa que o valor produzido no território é maior do que o que fica nas mãos dos residentes. A diferença é a renda líquida enviada ao exterior: juros da dívida externa, remessa de lucros de multinacionais, royalties por tecnologia. É uma medida da dependência de capital externo e da transferência de excedente para fora do país.',
-        err:'❌ PIB > PNB significa que o Brasil remete mais renda ao exterior do que recebe. Capital estrangeiro opera no território (e gera PIB), mas o lucro é repatriado (saindo do PNB). É uma medida da dependência estrutural de capital externo e da transferência de excedente para fora — uma dimensão central da nossa inserção na globalização.' },
+        ok:'PIB > PNB significa que o valor produzido no território é maior do que o que fica nas mãos dos residentes. A diferença é a renda líquida enviada ao exterior: juros da dívida externa, remessa de lucros de multinacionais, royalties por tecnologia.',
+        err:'PIB > PNB significa que o Brasil remete mais renda ao exterior do que recebe. Capital estrangeiro opera no território (e gera PIB), mas o lucro é repatriado (saindo do PNB). É uma medida da dependência estrutural de capital externo.' },
       { id:'M5D2', tipo:'mc', ttl:'A Identidade Fundamental',
         p:'A identidade básica da Contabilidade Social é: Produto Nacional = Despesa Nacional = Renda Nacional. Por que as TRÊS medidas chegam ao mesmo número?',
         ops:['Por convenção estatística internacional que força os cálculos a convergir artificialmente',
@@ -697,13 +780,13 @@ const MISSOES = [
              'Porque inflação e deflação se cancelam mutuamente quando se usa preços correntes',
              'Porque o governo tributa igualmente as três medidas, forçando a equalização'],
         correta:1,
-        ok:'💡 Perfeito! O fluxo circular da renda é isso: o que é produzido gera renda para quem produziu, que é gasta comprando o que foi produzido. É o mesmo excedente que circula. Isso não é convenção — é a lógica da reprodução material capitalista em ação.',
-        err:'❌ Não é convenção — é a lógica da reprodução material. O que a sociedade produz (PIB pelo produto) é comprado por alguém (PIB pela despesa: C+I+G+X-M) e remunera os fatores que o produziram (PIB pela renda: salários+juros+aluguéis+lucros). É o mesmo excedente visto de três perspectivas do fluxo circular.' },
+        ok:'O fluxo circular da renda: o que é produzido gera renda para quem produziu, que é gasta comprando o que foi produzido. É o mesmo excedente que circula. Isso não é convenção — é a lógica da reprodução material capitalista em ação.',
+        err:'Não é convenção — é a lógica da reprodução material. O que a sociedade produz (PIB pelo produto) é comprado por alguém (PIB pela despesa: C+I+G+X-M) e remunera os fatores que o produziram (PIB pela renda: salários+juros+aluguéis+lucros).' },
       { id:'M5D3', tipo:'vf', ttl:'Renda Nacional e Distribuição',
         p:'"Se quero entender quem se apropria do excedente econômico brasileiro, olhar para a composição da Renda Nacional (quanto vai para Salários vs. Lucros vs. Aluguéis) é mais informativo do que olhar apenas para o crescimento do PIB." Esta afirmação está correta?',
         correta:true,
-        ok:'✅ Exatamente! Isso fecha o círculo do curso. A Renda Nacional decomposta pelos fatores de produção mostra a distribuição funcional da renda: que fração do excedente vai para o Trabalho (salários) vs. Capital (lucros, juros) vs. Terra (aluguéis). É a fotografia das relações de propriedade em termos quantitativos — o que Polanyi descrevia qualitativamente.',
-        err:'❌ Essa é a conexão central do curso! O crescimento do PIB diz que o bolo cresceu, mas não quem ficou com as fatias. A decomposição da Renda Nacional em salários, lucros, juros e aluguéis — cada um correspondendo a um fator de produção e à sua propriedade — mostra a distribuição funcional do excedente.' },
+        ok:'Isso fecha o círculo do curso. A Renda Nacional decomposta pelos fatores de produção mostra a distribuição funcional da renda: que fração do excedente vai para o Trabalho (salários) vs. Capital (lucros, juros) vs. Terra (aluguéis).',
+        err:'O crescimento do PIB diz que o bolo cresceu, mas não quem ficou com as fatias. A decomposição da Renda Nacional em salários, lucros, juros e aluguéis mostra a distribuição funcional do excedente.' },
       { id:'M5D4', tipo:'mc', ttl:'Valor Adicionado',
         p:'Por que o cálculo do PIB usa o conceito de "valor adicionado" em vez de somar todas as transações de todas as empresas?',
         ops:['Porque o valor adicionado é sempre maior que o valor bruto das transações, inflando o PIB para fins políticos',
@@ -711,11 +794,11 @@ const MISSOES = [
              'Porque empresas pequenas não reportam suas transações totais ao governo, tornando necessário um ajuste estatístico',
              'Porque o valor adicionado desconta a inflação, tornando o PIB uma medida em preços constantes'],
         correta:1,
-        ok:'🌟 Exato! Valor adicionado = receita de vendas − custo dos insumos. Isso captura apenas o que CADA ETAPA contribuiu para a produção final, evitando contar o mesmo valor múltiplas vezes. É também equivalente à remuneração dos fatores nessa etapa — conectando produto e renda.',
-        err:'❌ O valor adicionado evita a dupla contagem. Se somarmos trigo (R$140) + farinha (R$245) + pão (R$390), contamos o trigo três vezes! O valor adicionado de cada etapa captura apenas o que aquela etapa acrescentou, e sua soma dá o valor do produto final — sem duplicações.' },
+        ok:'Valor adicionado = receita de vendas − custo dos insumos. Isso captura apenas o que CADA ETAPA contribuiu para a produção final, evitando contar o mesmo valor múltiplas vezes.',
+        err:'O valor adicionado evita a dupla contagem. Se somarmos trigo + farinha + pão, contamos o trigo três vezes! O valor adicionado de cada etapa captura apenas o que aquela etapa acrescentou.' },
       { id:'M5D5', tipo:'ens', ttl:'Síntese do Curso',
         p:'Conecte os temas do curso: usando os conceitos de reprodução material, relações de propriedade, fatores de produção e Contabilidade Social (PIB/Renda Nacional), explique por que o crescimento do PIB por si só não é uma medida suficiente do desenvolvimento de uma sociedade. (Mínimo 50 palavras)',
-        min:50, ph:'Pense: o PIB mede a reprodução material (produção total), mas o que ele não captura? Como as relações de propriedade determinam a distribuição do excedente que o PIB gera? O que Polanyi diria sobre usar o PIB como único objetivo de uma nação?' }
+        min:50, ph:'Pense: o PIB mede a reprodução material (produção total), mas o que ele não captura? Como as relações de propriedade determinam a distribuição do excedente que o PIB gera?' }
     ]
   }
 ];
@@ -723,51 +806,51 @@ const MISSOES = [
 // ================================================================
 // MOTOR DO JOGO
 // ================================================================
-let MA = null; // missão ativa
+let MA = null;
 let cena = 0, desafio = 0, acertos = 0;
 
 function iniciar(){
   const n = document.getElementById('inp-nome').value.trim();
   const e = document.getElementById('inp-email').value.trim();
-  if(!n||!e){ alert('Preencha nome e e-mail!'); return; }
+  if(!n||!e){ alert('Preencha nome e e-mail.'); return; }
   S.nome=n; S.email=e; S.mat=document.getElementById('inp-mat').value.trim();
   document.getElementById('badge-nome').textContent = n.split(' ')[0].toUpperCase();
   document.getElementById('tela-cadastro').style.display='none';
   document.getElementById('jogo').style.display='flex';
-  confete(); renderMapa();
+  renderMapa();
 }
 
 function renderMapa(){
   document.getElementById('tela-mapa').style.display='block';
   document.getElementById('tela-missao').style.display='none';
   const g=document.getElementById('missoes-grid'); g.innerHTML='';
-  MISSOES.forEach(m=>{
+  MISSOES.forEach((m,idx)=>{
     const ok=S.concluidas.includes(m.id);
     const blq=m.prerequisito&&!S.concluidas.includes(m.prerequisito);
     const card=document.createElement('div');
     card.className=`missao-card${blq?' bloqueada':''}${ok?' concluida':''}`;
     card.onclick=()=>!blq&&abrirMissao(m.id);
     card.innerHTML=`
-      <div class="missao-banner" style="background:${m.cor}">
-        <span class="missao-id">${m.id}</span>
-        <span style="filter:drop-shadow(2px 2px 3px rgba(0,0,0,0.4));animation:flutuando ${1.5+Math.random()}s ease-in-out infinite">${m.icone}</span>
-      </div>
+      <div class="missao-status-bar"></div>
       <div class="missao-body">
-        <div class="missao-nome">${m.nome}</div>
+        <div class="missao-top">
+          <span class="missao-num">${m.id}</span>
+          <span class="missao-nome">${m.nome}</span>
+        </div>
         <div class="missao-desc">${m.desc}</div>
         <div class="missao-meta">
-          <span class="missao-xp">⭐ ${m.xp} XP</span>
-          <span class="missao-status ${ok?'s-ok':blq?'s-blq':'s-disp'}">${ok?'✓ COMPLETA':blq?'🔒 BLOQUEADA':'▶ DISPONÍVEL'}</span>
+          <span class="missao-xp">${m.xp} XP</span>
+          <span class="missao-status ${ok?'s-ok':blq?'s-blq':'s-disp'}">${ok?'Concluído':blq?'Bloqueado':'Disponível'}</span>
         </div>
-        ${blq?`<div style="font-size:0.72rem;color:#aaa;margin-top:0.4rem">Conclua ${m.prerequisito} primeiro</div>`:''}
+        ${blq?`<div style="font-size:0.7rem;color:var(--text-dim);margin-top:0.4rem">Conclua o módulo ${m.prerequisito} primeiro</div>`:''}
       </div>`;
     g.appendChild(card);
   });
   const f=S.concluidas.length, t=MISSOES.length;
   document.getElementById('mapa-sub').textContent=
-    f===0?'Escolha sua primeira missão!':
-    f===t?'🏆 Todas concluídas! Envie seus resultados!':
-    `${f}/${t} missões — Continue a jornada!`;
+    f===0?'Selecione um módulo para começar.':
+    f===t?'Todos os módulos concluídos. Envie seus resultados.':
+    `${f} de ${t} módulos concluídos.`;
   updXP();
 }
 
@@ -775,6 +858,13 @@ function abrirMissao(id){
   MA=MISSOES.find(m=>m.id===id);
   cena=0; desafio=0; acertos=0;
   if(!S.respostas[id]) S.respostas[id]={};
+  // Recontagem de acertos de respostas já salvas
+  MA.desafios.forEach(d=>{
+    const resp = S.respostas[id][d.id];
+    if(resp === undefined) return;
+    if(d.tipo==='mc' && resp === d.correta) acertos++;
+    if(d.tipo==='vf' && resp === d.correta) acertos++;
+  });
   document.getElementById('tela-mapa').style.display='none';
   document.getElementById('tela-missao').style.display='flex';
   render();
@@ -782,44 +872,41 @@ function abrirMissao(id){
 
 function render(){
   const c=document.getElementById('mc');
-  const total=MA.cenas.length+MA.desafios.length;
+  const totalSteps=MA.cenas.length+MA.desafios.length;
   const passo=cena+desafio;
-  const pct=Math.round((passo/total)*100);
-  const objDesafios=MA.desafios.filter(d=>d.tipo!=='ens'&&d.tipo!=='drag').length;
+  const pct=Math.round((passo/totalSteps)*100);
+
+  // === FIX: Conta TODOS os desafios respondidos / total de desafios ===
+  const totalDesafios = MA.desafios.length;
+  const respondidos = MA.desafios.filter(d => S.respostas[MA.id][d.id] !== undefined).length;
 
   let h=`
-    <div style="display:flex;align-items:center;gap:1rem;margin-bottom:1.3rem;flex-wrap:wrap">
-      <button class="btn-nav btn-voltar" onclick="voltarMapa()">← MAPA</button>
-      <div style="flex:1">
-        <div style="font-family:'Bangers',cursive;font-size:1.4rem;letter-spacing:2px;color:${MA.cor}">${MA.icone} ${MA.nome}</div>
-        <div style="font-size:0.78rem;color:#888">${MA.id} · ${acertos}/${objDesafios} corretos</div>
+    <div class="missao-header-bar">
+      <button class="btn-nav btn-voltar" onclick="voltarMapa()">← Módulos</button>
+      <div class="missao-meta-info">
+        <div class="missao-meta-title">${MA.nome}</div>
+        <div class="missao-meta-sub">${MA.id} · ${respondidos}/${totalDesafios} questões respondidas</div>
       </div>
     </div>
     <div class="prog-bar"><div class="prog-fill" style="width:${pct}%"></div></div>`;
 
-  // Cenas já vistas
   MA.cenas.forEach((cn,i)=>{ if(i<cena) h+=renderCena(cn); });
-  // Cena atual
   if(cena<MA.cenas.length){
     h+=renderCena(MA.cenas[cena]);
-    h+=`<button class="btn-nav btn-cont" onclick="advCena()" style="margin-bottom:1.5rem">▶ CONTINUAR</button>`;
+    h+=`<button class="btn-nav btn-cont" onclick="advCena()" style="margin-bottom:1.5rem">Continuar →</button>`;
   } else {
-    // Desafios
     for(let i=0;i<=desafio&&i<MA.desafios.length;i++) h+=renderDesafio(MA.desafios[i],i);
-    // Botão concluir
     const todos=MA.desafios.every(d=>S.respostas[MA.id][d.id]!==undefined);
     if(desafio>=MA.desafios.length-1&&todos){
       h+=`<div style="display:flex;gap:1rem;margin-top:1.5rem">
-        <button class="btn-nav btn-concluir" onclick="concluir()">🏆 CONCLUIR MISSÃO</button>
+        <button class="btn-nav btn-concluir" onclick="concluir()">Concluir Módulo</button>
       </div>`;
     }
   }
   c.innerHTML=h;
-  // Re-init drag
   MA.desafios.forEach(d=>{ if(d.tipo==='drag') initDrag(d); });
 }
 
-// ---- renderizadores ----
 function renderCena(cn){
   if(cn.tipo==='historia') return `
     <div class="panel">
@@ -834,13 +921,14 @@ function renderCena(cn){
   if(cn.tipo==='anim') return `
     <div class="panel">
       <div class="cena-anim">
-        <div class="cena-els">${cn.els.map((e,i)=>`<span class="cena-el" style="animation-delay:${i*0.5}s">${e}</span>`).join('')}</div>
+        <div class="cena-els">${cn.els.map(e=>`<span>${e}</span>`).join('')}</div>
         <div class="cena-ttl">${cn.ttl}</div>
       </div>
     </div>`;
   if(cn.tipo==='conceito') return `
-    <div class="conceito" data-label="${cn.label}" style="--c:${cn.c};--cb:${cn.cb}">
-      <div class="conceito-ttl" style="color:${cn.c}">${cn.ttl}</div>
+    <div class="conceito" style="--c-clr:${cn.clr};--c-bg:${cn.bg};--c-bdr:${cn.bdr}">
+      <div class="conceito-label">${cn.label}</div>
+      <div class="conceito-ttl">${cn.ttl}</div>
       <div class="conceito-txt">${cn.txt}</div>
     </div>`;
   return '';
@@ -849,7 +937,7 @@ function renderCena(cn){
 function renderDesafio(d,idx){
   const resp=S.respostas[MA.id][d.id];
   const respp=resp!==undefined;
-  const tipoLabel={mc:'MÚLTIPLA ESCOLHA',vf:'V ou F',drag:'CLASSIFICAR',ens:'DISSERTATIVA'};
+  const tipoLabel={mc:'Múltipla Escolha',vf:'Verdadeiro ou Falso',drag:'Classificação',ens:'Dissertativa'};
   const tipoCls={mc:'d-mc',vf:'d-vf',drag:'d-drag',ens:'d-ens'};
   let h=`
     <div class="desafio" id="des-${d.id}">
@@ -870,17 +958,14 @@ function renderDesafio(d,idx){
       h+=`<button class="opcao ${cl}" onclick="respMC('${d.id}',${i},${d.correta})" ${respp?'disabled':''}><span class="opcao-ltr">${L[i]}</span><span>${op}</span></button>`;
     });
     h+=`</div>`;
-    if(respp){
-      const ok2=resp===d.correta;
-      h+=`<div class="feedback ${ok2?'ok':'err'}">${ok2?d.ok:d.err}</div>`;
-    }
+    if(respp){ const ok2=resp===d.correta; h+=`<div class="feedback ${ok2?'ok':'err'}">${ok2?d.ok:d.err}</div>`; }
   }
 
   if(d.tipo==='vf'){
     h+=`<div class="vof-wrap">`;
-    [{v:true,lbl:'✓ VERDADEIRO',cls:'verd'},{v:false,lbl:'✗ FALSO',cls:'fals'}].forEach(opt=>{
+    [{v:true,lbl:'Verdadeiro',cls:'verd'},{v:false,lbl:'Falso',cls:'fals'}].forEach(opt=>{
       let st='';
-      if(respp){ if(opt.v===d.correta) st='outline:3px solid var(--green);'; else if(resp===opt.v&&opt.v!==d.correta) st='outline:3px solid var(--red);opacity:0.55;'; }
+      if(respp){ if(opt.v===d.correta) st='outline:2px solid var(--green);'; else if(resp===opt.v&&opt.v!==d.correta) st='outline:2px solid var(--red);opacity:0.55;'; }
       h+=`<button class="vof-btn ${opt.cls}" style="${st}" onclick="respVF('${d.id}',${opt.v},${d.correta})" ${respp?'disabled':''}>${opt.lbl}</button>`;
     });
     h+=`</div>`;
@@ -888,26 +973,26 @@ function renderDesafio(d,idx){
   }
 
   if(d.tipo==='drag'){
-    h+=`<div style="font-size:0.82rem;font-weight:700;color:#555;margin-bottom:0.7rem">👆 Toque num item e depois numa coluna para classificar:</div>
+    h+=`<div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:0.7rem">Toque em um item e depois na coluna correspondente para classificá-lo.</div>
       <div class="drag-pool" id="pool-${d.id}">
         ${d.itens.map(it=>`<div class="drag-it" id="di-${d.id}-${it.id}" data-item="${it.id}" data-des="${d.id}" onclick="tapItem(this)">${it.txt}</div>`).join('')}
       </div>
       <div class="drop-cols">
         ${d.zonas.map(z=>`<div>
-          <div class="drop-col-lbl" style="color:${z.classe==='dz-a'?'var(--blue)':z.classe==='dz-b'?'var(--red)':'var(--green)'}">${z.lbl}</div>
+          <div class="drop-col-lbl" style="color:${z.classe==='dz-a'?'var(--accent)':z.classe==='dz-b'?'var(--red)':'var(--green)'}">${z.lbl}</div>
           <div class="drop-zone ${z.classe}" id="dz-${d.id}-${z.id}" onclick="tapZone(this,'${d.id}')"></div>
         </div>`).join('')}
       </div>
-      <button class="btn-conf" id="bc-${d.id}" onclick="confDrag('${d.id}')" ${respp?'disabled':''}>✓ CONFIRMAR</button>`;
-    if(respp) h+=`<div class="feedback ok">✅ Classificação registrada!</div>`;
+      <button class="btn-conf" id="bc-${d.id}" onclick="confDrag('${d.id}')" ${respp?'disabled':''}>Confirmar</button>`;
+    if(respp) h+=`<div class="feedback ok">Classificação registrada.</div>`;
   }
 
   if(d.tipo==='ens'){
     const saved=respp&&resp.txt?resp.txt:'';
-    h+=`<textarea class="textarea-d" id="ta-${d.id}" placeholder="${d.ph||'Escreva aqui...'}" ${respp?'disabled':''}>${saved}</textarea>
-      <div style="font-size:0.78rem;color:#888;margin-top:0.3rem">Mínimo ${d.min||20} palavras</div>
-      ${!respp?`<button class="btn-conf" onclick="respEns('${d.id}',${d.min||20})">✓ SALVAR RESPOSTA</button>`
-               :`<div class="feedback ok">✅ Resposta salva!</div>`}`;
+    h+=`<textarea class="textarea-d" id="ta-${d.id}" placeholder="${d.ph||'Escreva sua resposta...'}" ${respp?'disabled':''}>${saved}</textarea>
+      <div style="font-size:0.75rem;color:var(--text-dim);margin-top:0.3rem">Mínimo ${d.min||20} palavras</div>
+      ${!respp?`<button class="btn-conf" onclick="respEns('${d.id}',${d.min||20})">Salvar Resposta</button>`
+               :`<div class="feedback ok">Resposta registrada.</div>`}`;
   }
 
   h+=`</div></div>`; return h;
@@ -917,24 +1002,24 @@ function renderDesafio(d,idx){
 function respMC(id,escolha,correta){
   if(S.respostas[MA.id][id]!==undefined) return;
   S.respostas[MA.id][id]=escolha;
-  if(escolha===correta){ acertos++; boom('CERTO!','#1e8449',id); }
-  else boom('OPS!','#c0392b',id);
-  setTimeout(()=>advDesafio(id),380);
+  if(escolha===correta){ acertos++; notif('Correto','ok'); }
+  else notif('Incorreto','nok');
+  setTimeout(()=>advDesafio(id),350);
 }
 function respVF(id,val,correta){
   if(S.respostas[MA.id][id]!==undefined) return;
   S.respostas[MA.id][id]=val;
-  if(val===correta){ acertos++; boom('CERTO!','#1e8449',id); }
-  else boom('OPS!','#c0392b',id);
-  setTimeout(()=>advDesafio(id),380);
+  if(val===correta){ acertos++; notif('Correto','ok'); }
+  else notif('Incorreto','nok');
+  setTimeout(()=>advDesafio(id),350);
 }
 function respEns(id,min){
   const txt=document.getElementById('ta-'+id).value.trim();
   const w=txt.split(/\s+/).filter(x=>x.length>0).length;
-  if(w<min){ alert(`Mínimo ${min} palavras! Você escreveu ${w}.`); return; }
+  if(w<min){ alert(`Mínimo ${min} palavras. Você escreveu ${w}.`); return; }
   S.respostas[MA.id][id]={txt};
-  boom('ÓTIMO!','#7d3c98',id);
-  setTimeout(()=>advDesafio(id),380);
+  notif('Registrado','neutro');
+  setTimeout(()=>advDesafio(id),350);
 }
 function confDrag(id){
   const d=MA.desafios.find(x=>x.id===id);
@@ -943,8 +1028,8 @@ function confDrag(id){
     resultado[z.id]=Array.from(document.querySelectorAll(`#dz-${id}-${z.id} .drag-it`)).map(el=>el.dataset.item);
   });
   S.respostas[MA.id][id]=resultado;
-  boom('OK!','#117a65',id);
-  setTimeout(()=>advDesafio(id),380);
+  notif('Registrado','neutro');
+  setTimeout(()=>advDesafio(id),350);
 }
 
 function advCena(){ cena++; render(); window.scrollTo(0,0); }
@@ -956,23 +1041,15 @@ function advDesafio(id){
 }
 function voltarMapa(){ MA=null; renderMapa(); }
 
-// ---- drag and drop (desktop HTML5 + mobile tap) ----
+// ---- drag and drop ----
 let tapSelecionado = null;
-
 function tapItem(el){
   if(el.dataset.des){
-    // Se já há item selecionado, deseleciona
-    if(tapSelecionado===el){
-      el.classList.remove('tap-sel');
-      tapSelecionado=null; return;
-    }
-    // Deseleciona anterior
+    if(tapSelecionado===el){ el.classList.remove('tap-sel'); tapSelecionado=null; return; }
     if(tapSelecionado) tapSelecionado.classList.remove('tap-sel');
-    el.classList.add('tap-sel');
-    tapSelecionado=el;
+    el.classList.add('tap-sel'); tapSelecionado=el;
   }
 }
-
 function tapZone(zone, desId){
   if(!tapSelecionado) return;
   if(tapSelecionado.dataset.des !== desId) return;
@@ -980,10 +1057,8 @@ function tapZone(zone, desId){
   tapSelecionado.classList.remove('tap-sel');
   tapSelecionado=null;
 }
-
 function initDrag(d){
   setTimeout(()=>{
-    // Desktop: HTML5 drag and drop
     document.querySelectorAll(`[data-des="${d.id}"]`).forEach(el=>{
       el.setAttribute('draggable','true');
       el.addEventListener('dragstart',e=>{ el.classList.add('dragging'); e.dataTransfer.setData('text/plain',el.id); });
@@ -1005,18 +1080,17 @@ function concluir(){
   S.xp=Math.min(S.xp+ganho,S.xpMax);
   if(!S.concluidas.includes(MA.id)) S.concluidas.push(MA.id);
 
-  document.getElementById('m-emoji').textContent=pct>=75?'🏆':pct>=50?'⭐':'📚';
-  document.getElementById('m-titulo').textContent=pct>=75?'MISSÃO ÉPICA!':pct>=50?'BOA MISSÃO!':'MISSÃO COMPLETA!';
-  document.getElementById('m-acerto').textContent=`${acertos}/${objD} CORRETOS (${pct}%)`;
+  document.getElementById('m-emoji').textContent=pct>=75?'◆':pct>=50?'◇':'○';
+  document.getElementById('m-titulo').textContent='Módulo Concluído';
+  document.getElementById('m-acerto').textContent=`${acertos}/${objD} respostas corretas (${pct}%)`;
   document.getElementById('m-xp').textContent=`+${ganho} XP`;
   document.getElementById('m-msg').textContent=pct>=75
-    ?'Excelente! Você dominou o conteúdo com precisão.'
-    :pct>=50?'Boa performance! Revise os pontos onde errou.'
-    :'Missão completa! Recomendamos reler o material desta aula.';
+    ?'Excelente desempenho. Conceitos bem assimilados.'
+    :pct>=50?'Bom desempenho. Revise os pontos onde errou.'
+    :'Módulo completo. Recomenda-se reler o material desta aula.';
   document.getElementById('modal-res').classList.add('ativo');
-  if(pct>=75) confete();
   updXP();
-  if(S.concluidas.length===MISSOES.length) setTimeout(()=>{ document.getElementById('modal-res').classList.remove('ativo'); finalizar(); },2800);
+  if(S.concluidas.length===MISSOES.length) setTimeout(()=>{ document.getElementById('modal-res').classList.remove('ativo'); finalizar(); },2500);
 }
 
 function fecharModal(){ document.getElementById('modal-res').classList.remove('ativo'); voltarMapa(); }
@@ -1024,14 +1098,16 @@ function finalizar(){
   document.getElementById('tela-mapa').style.display='none';
   document.getElementById('tela-missao').style.display='none';
   document.getElementById('tela-final').style.display='flex';
-  document.getElementById('final-xp').textContent=`${S.xp} XP CONQUISTADOS!`;
-  confete();
+  document.getElementById('final-xp').textContent=`${S.xp} XP conquistados`;
 }
 
 // ---- envio ----
 async function enviar(){
   const btn=document.getElementById('btn-enviar');
-  btn.textContent='⏳ ENVIANDO...'; btn.disabled=true;
+  const statusEl=document.getElementById('envio-status');
+  btn.textContent='Enviando...'; btn.disabled=true;
+  statusEl.className='envio-status wait'; statusEl.textContent='Enviando dados...'; statusEl.style.display='block';
+
   const payload={
     timestamp:new Date().toISOString(),
     nome_aluno:S.nome, email:S.email, matricula:S.mat,
@@ -1046,14 +1122,25 @@ async function enviar(){
       payload[`dissertativa_${col}`]=r?r.txt:''; col++;
     }
   }));
-  if(WEBHOOK==='COLE_AQUI_A_URL_DO_GOOGLE_APPS_SCRIPT'){
-    alert('⚠️ Configure o WEBHOOK para ativar o envio!\n\nDados prontos:\n'+JSON.stringify(payload,null,2).substring(0,600)+'...');
-    btn.textContent='✅ CONFIGURE O WEBHOOK'; btn.disabled=false; return;
+
+  try {
+    await fetch(WEBHOOK, { method:'POST', redirect:'follow', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload) });
+    btn.textContent='Enviado com sucesso'; btn.style.background='var(--green)';
+    statusEl.className='envio-status ok'; statusEl.textContent='Dados enviados ao professor.';
+    return;
+  } catch(e) { console.log('Fetch falhou, tentando form...', e); }
+
+  try {
+    const form = document.createElement('form');
+    form.method='POST'; form.action=WEBHOOK; form.target='envio-frame'; form.style.display='none';
+    const input = document.createElement('input'); input.type='hidden'; input.name='payload'; input.value=JSON.stringify(payload); form.appendChild(input);
+    Object.entries(payload).forEach(([k,v])=>{ const inp=document.createElement('input'); inp.type='hidden'; inp.name=k; inp.value=typeof v==='string'?v:JSON.stringify(v); form.appendChild(inp); });
+    document.body.appendChild(form); form.submit();
+    setTimeout(()=>{ document.body.removeChild(form); btn.textContent='Enviado com sucesso'; btn.style.background='var(--green)'; statusEl.className='envio-status ok'; statusEl.textContent='Dados enviados ao professor.'; },2000);
+  } catch(e2) {
+    btn.textContent='Erro — Tente novamente'; btn.disabled=false;
+    statusEl.className='envio-status err'; statusEl.textContent='Erro no envio. Tente novamente.';
   }
-  try{
-    await fetch(WEBHOOK,{method:'POST',mode:'no-cors',body:JSON.stringify(payload)});
-    btn.textContent='✅ ENVIADO!'; btn.style.background='var(--green)';
-  } catch(e){ btn.textContent='❌ ERRO — Tente novamente'; btn.disabled=false; }
 }
 
 // ---- helpers ----
@@ -1061,28 +1148,12 @@ function updXP(){
   const p=(S.xp/S.xpMax)*100;
   document.getElementById('xp-bar').style.width=p+'%';
   document.getElementById('xp-val').textContent=`${S.xp}/${S.xpMax}`;
+  document.getElementById('missoes-hdr').textContent=`${S.concluidas.length}/${MISSOES.length}`;
 }
-function boom(txt,cor,desafioId){
+function notif(txt,tipo){
   const el=document.createElement('div');
-  el.className='onom'; el.textContent=txt; el.style.color=cor;
-  const ref=document.getElementById('des-'+desafioId);
-  if(ref){ const r=ref.getBoundingClientRect(); el.style.top=(r.top+window.scrollY+20)+'px'; el.style.left=(r.left+r.width/2)+'px'; el.style.position='absolute'; }
-  else { el.style.top='30%'; el.style.left='50%'; el.style.position='fixed'; }
-  document.body.appendChild(el); setTimeout(()=>el.remove(),560);
-}
-function confete(){
-  const cores=['#f39c12','#c0392b','#27ae60','#2471a3','#7d3c98','#e67e22'];
-  for(let i=0;i<38;i++){
-    const c=document.createElement('div');
-    c.className='confete';
-    c.style.left=Math.random()*100+'vw'; c.style.top='-20px';
-    c.style.background=cores[Math.floor(Math.random()*cores.length)];
-    c.style.width=(6+Math.random()*9)+'px'; c.style.height=(6+Math.random()*9)+'px';
-    c.style.borderRadius=Math.random()>0.5?'50%':'0';
-    c.style.animationDelay=Math.random()*2+'s';
-    c.style.animationDuration=(2+Math.random()*2)+'s';
-    document.body.appendChild(c); setTimeout(()=>c.remove(),4200);
-  }
+  el.className=`notif ${tipo}`; el.textContent=txt;
+  document.body.appendChild(el); setTimeout(()=>el.remove(),1600);
 }
 </script>
 </body>
